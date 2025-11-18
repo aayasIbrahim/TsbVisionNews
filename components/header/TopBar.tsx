@@ -1,4 +1,3 @@
-import React from "react";
 import { getAllDates } from "@/utils/GetAlldate";
 import { CiSearch } from "react-icons/ci";
 import Image from "next/image";
@@ -19,7 +18,7 @@ function TopBar() {
       {/* Right Section: Date above Search */}
       <div className="flex flex-col w-full sm:w-auto gap-2">
         {/* Date */}
-        <p className="font-solaiman font-normal text-[15px] sm:text-[16px] leading-[120%] tracking-[0%] text-gray-700">
+        <p className="font-solaiman font-normal text-gray-700 text-[14px] sm:text-[15px] md:text-[16px] lg:text-[17px] xl:text-[18px] leading-relaxed text-justify text-center sm:text-left">
           {getAllDates()}
         </p>
 
