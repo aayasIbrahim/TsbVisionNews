@@ -21,7 +21,7 @@ const NewsTicker = () => {
 
   return (
     <div
-      className="w-full bg-white  border-b border-gray-200"
+      className="w-full bg-white  border-b-[1.3px] border-black"
       style={{ fontFamily: `"Noto Sans Bengali", "Inter", sans-serif` }}
     >
       <style>{`

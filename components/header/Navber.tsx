@@ -148,7 +148,7 @@ const NavBar: React.FC = () => {
     <div className="bg-gray-50" style={bengaliFont}>
       <nav className="sticky top-0 z-50 ">
         {/* TOP BAR */}
-        <div className="bg-white px-4 sm:py-3 border-b border-gray-500">
+        <div className="bg-white px-4 sm:py-3 border-b-[1px] border-black">
           <div className="flex justify-between items-center container mx-auto w-full">
             <div className="w-full overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 sm:hidden">
               <ul className="flex space-x-6 whitespace-nowrap py-2">

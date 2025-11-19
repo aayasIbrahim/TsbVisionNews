@@ -45,9 +45,7 @@ const NewsFooter = () => {
           {/* Left Column */}
           <div className="md:col-span-1 text-center md:text-left ">
             <div className="flex items-center justify-center md:justify-start space-x-2 mb-1">
-          
-          
-           <Logo/>
+              <Logo />
             </div>
 
             <div className="grid grid-cols-3 gap-4 text-sm mt-4">
@@ -71,19 +69,30 @@ const NewsFooter = () => {
           {/* Right Column */}
           <div className="md:col-span-2 flex justify-center md:justify-end mt-8 md:mt-0">
             <div className="text-center md:text-right w-full md:w-auto">
-              <h2 className="text-lg font-bold mb-4">ভারপ্রাপ্ত সম্পাদক: নাহিদ জিহান</h2>
+              <h2 className="text-lg font-bold mb-4">
+                ভারপ্রাপ্ত সম্পাদক: এম ডি{" "} বাইজীদ
+              </h2>
               <ul className="space-y-3 text-sm mb-6">
                 <li className="flex items-center justify-center md:justify-end">
                   <MapPin size={16} className="mr-2 flex-shrink-0" />
-                  ৪৫৫সি-৪৪৫/টি, তেজগাঁও শিল্প এলাকা, ঢাকা-১২০৮
+                  আশুলিয়া বাসস্ট্যান্ড, সাভার, ঢাকা ১৩৪০
                 </li>
                 <li className="flex items-center justify-center md:justify-end">
                   <Phone size={16} className="mr-2 flex-shrink-0" />
-                  +৮৮-০২-৯৮৪৬৭২২৬
+
+                  <a href="tel:01929450836" className="hover:underline">
+                    01929450836
+                  </a>
                 </li>
                 <li className="flex items-center justify-center md:justify-end">
                   <Mail size={16} className="mr-2 flex-shrink-0" />
-                  amardeshonline@gmail.com
+
+                  <a
+                    href="mailto:tsbvisionnews.net@gmail.com"
+                    className="hover:underline"
+                  >
+                    tsbvisionnews.net@gmail.com
+                  </a>
                 </li>
               </ul>
             </div>
@@ -94,7 +103,10 @@ const NewsFooter = () => {
         <div className="flex flex-wrap justify-center sm:justify-start py-4 space-x-2 sm:space-x-6 text-xs font-medium relative">
           <ul className="flex flex-wrap justify-center sm:justify-start gap-2 sm:gap-4">
             {bottomLinks.map((link) => (
-              <li key={link.name} className="flex items-center hover:text-red-400 transition duration-150">
+              <li
+                key={link.name}
+                className="flex items-center hover:text-red-400 transition duration-150"
+              >
                 <span className="w-1.5 h-1.5 bg-red-400 mr-2 flex-shrink-0"></span>
                 <a href={link.href}>{link.name}</a>
               </li>
