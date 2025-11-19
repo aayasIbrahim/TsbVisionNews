@@ -146,7 +146,7 @@ const NavBar: React.FC = () => {
 
   return (
     <div className="bg-gray-50" style={bengaliFont}>
-      <header className="sticky top-0 z-50 ">
+      <nav className="sticky top-0 z-50 ">
         {/* TOP BAR */}
         <div className="bg-white px-4 py-3 border-b border-gray-500">
           <div className="flex justify-between items-center container mx-auto w-full">
@@ -252,7 +252,7 @@ const NavBar: React.FC = () => {
             </div>
           </div>
         </div>
-      </header>
+      </nav>
     </div>
   );
 };
