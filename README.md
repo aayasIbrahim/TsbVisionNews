@@ -2,6 +2,61 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
+{
+  "title": "দুই ধাপে বিশ্ব ইজতেমা, তারিখ জানালেন স্বরাষ্ট্রমন্ত্রী",
+  "summary": "আগামী বছর দুই ধাপে বিশ্ব ইজতেমা অনুষ্ঠিত হবে প্রথম ধাপে ০২ জানুয়ারি থেকে ৫ ফেব্রুয়ারি পর্যন্ত এবং দ্বিতীয় পর্ব ৭ ফেব্রুয়ারি থেকে ১০ ফেব্রুয়ারি পর্যন্ত অনুষ্ঠিত হবে...",
+  "content": "পুরো নিউজের বিস্তারিত এখানে...",
+  "category": "National",
+  "imageSrc": "https://placehold.co/600x400/059669/ffffff?text=Ijtema+Ground",
+  "author": "Ayas Ibrahim",
+  "publishedAt": "2025-11-22T08:00:00+06:00",
+  "updatedAt": "2025-11-22T08:00:00+06:00",
+  "tags": ["Ijtema", "Dhaka", "Bangladesh"],
+  "isFeatured": true
+}
+
+const mongoose = require('mongoose');
+
+const NewsSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true
+  },
+  summary: {
+    type: String,
+    required: true
+  },
+  content: {
+    type: String, // full article content (optional if you have summary only)
+  },
+  category: {
+    type: String, // e.g., "National", "International", "Sports"
+    required: true
+  },
+  imageSrc: {
+    type: String, // featured image URL
+  },
+  author: {
+    type: String,
+    default: "Admin"
+  },
+  publishedAt: {
+    type: Date,
+    default: Date.now
+  },
+  updatedAt: {
+    type: Date
+  },
+  tags: [String], // optional, for filtering or search
+  isFeatured: {
+    type: Boolean,
+    default: false
+  }
+});
+
+module.exports = mongoose.model('News', NewsSchema);
+
+
 First, run the development server:
 
 ```bash

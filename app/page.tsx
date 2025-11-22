@@ -1,3 +1,4 @@
+import EntertainmentSection from "@/components/EntertainmentSection";
 import HeaderSection from "@/components/HeadlineSection";
 import NationalNewsSection from "@/components/NationalNewsSection";
 import PoliticsSection from "@/components/PoliticsSection";
@@ -9,7 +10,8 @@ export default function Page() {
     <>
       <HeaderSection />
       <NationalNewsSection />
-      <PoliticsSection/>
+      <PoliticsSection />
+      <EntertainmentSection />
     </>
   );
 }
