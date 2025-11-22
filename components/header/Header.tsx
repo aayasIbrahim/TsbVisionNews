@@ -35,7 +35,7 @@ function Header() {
 
       {/* Navbar */}
       <div
-        className={`w-full   ${
+        className={`w-full  bg-white  border-black transition-all duration-300 ${
           isNavFixed ? "fixed top-0 left-0 z-50 shadow-md" : "relative"
         }`}
       >
