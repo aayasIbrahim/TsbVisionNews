@@ -54,9 +54,7 @@ const MainHeadline: React.FC<MainHeadlineProps> = ({ headlines }) => {
 
   return (
     <>
-      {/* ------------------------------------------------------------ */}
-      {/* HERO SECTION */}
-      {/* ------------------------------------------------------------ */}
+    
       <div className="relative bg-white shadow-xl rounded-xl overflow-hidden mb-6">
 
         <Image
@@ -82,7 +80,7 @@ const MainHeadline: React.FC<MainHeadlineProps> = ({ headlines }) => {
         </div>
       </div>
 
-      {/* ------------------------------------------------------------ */}
+    
       {/* OTHER HEADLINES */}
       {/* ------------------------------------------------------------ */}
       {otherHeadlines.map((headline) => (

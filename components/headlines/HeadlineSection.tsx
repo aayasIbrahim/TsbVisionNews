@@ -8,7 +8,7 @@ import {
   topHeadline,
   leftColumnNews,
   rightSidebarList,
-} from "@/data/headlinedata";
+} from "@/data/Data";
 
 export default function HeaderSection() {
   return (

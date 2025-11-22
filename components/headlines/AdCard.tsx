@@ -8,7 +8,6 @@ interface AdCardProps {
     details: string;
   };
 }
-
 const AdCard: React.FC<AdCardProps> = ({ ad }) => {
   return (
     <div className="p-4 bg-white mb-6 hover:shadow-md transition ">
