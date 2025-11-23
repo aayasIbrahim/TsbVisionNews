@@ -4,8 +4,8 @@ import React, { useState } from "react";
 import Image from "next/image";
 
 const AdvertisementBanner: React.FC = () => {
-  const adImageUrl = "/ads/image 2.png"; // Local or public path
-  const adLinkUrl = "https://www.waltonbd.com/"; // Click URL
+  const adImageUrl = "/ads/image 2.png"; 
+  const adLinkUrl = "https://www.waltonbd.com/"; 
   const altText = "Walton Smart Fridge Advertisement";
 
   const [visible, setVisible] = useState<boolean>(true);

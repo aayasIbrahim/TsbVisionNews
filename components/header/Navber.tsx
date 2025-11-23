@@ -20,23 +20,19 @@ interface NavMenuProps {
   isMobile?: boolean;
 }
 
-// ----------------------
-// ⭐ Menu Links Data
-// ----------------------
 const menuItems: MenuItem[] = [
-  { name: "সর্বশেষ", href: "#latest" },
-  { name: "রাজনীতি", href: "#politics" },
-  { name: "জাতীয়", href: "#national" },
-  { name: "বিশ্ব", href: "#world" },
-  { name: "বাণিজ্য", href: "#business" },
-  { name: "খেলা", href: "#sports" },
+  { name: "সর্বশেষ", href: "/" },
+  { name: "রাজনীতি", href: "/politics" },
+  { name: "জাতীয়", href: "/national" },
+  { name: "বাংলাদেশ", href: "/bangladesh" },
+  { name: "বিশ্ব", href: "/world" },
+  { name: "বাণিজ্য", href: "/business" },
+  { name: "খেলা", href: "/sports" },
 ];
 
-const specialLink: MenuItem = { name: "ই-পেপার", href: "#epaper" };
+const specialLink: MenuItem = { name: "ই-পেপার", href: "/" };
 
-// ----------------------
-// ⭐ UL Menu Component
-// ----------------------
+
 
 const NavMenu: React.FC<NavMenuProps> = ({
   items,
