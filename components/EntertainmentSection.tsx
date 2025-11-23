@@ -53,7 +53,7 @@ const EntertainmentSection = () => {
   return (
     <section className="bg-[#19363D] py-10">
       <div className="container mx-auto px-4">
-        <SectionHeader title="বিনোদন" />
+        <SectionHeader title="বিনোদন" className="text-white" />
 
         {/* GRID LAYOUT */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-6">

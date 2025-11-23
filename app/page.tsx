@@ -1,4 +1,5 @@
 
+import CommerceSection from "@/components/CommerchSection";
 import EntertainmentSection from "@/components/EntertainmentSection";
 import HeaderSection from "@/components/HeadlineSection";
 import NationalNewsSection from "@/components/NationalNewsSection";
@@ -12,6 +13,7 @@ export default function Page() {
     <>
       <HeaderSection />
       <NationalNewsSection />
+      <CommerceSection/>
       <PoliticsSection />
       <EntertainmentSection />
       <WorldSection/>
