@@ -6,6 +6,7 @@ import NationalNewsSection from "@/components/NationalNewsSection";
 import PoliticsSection from "@/components/PoliticsSection";
 import WorldSection from "@/components/WorldSection";
 import BangladeshSection from "@/components/BangladeshSection";
+import SportsSection from "@/components/SportsSection";
 export default function Page() {
   return (
     <>
@@ -16,6 +17,7 @@ export default function Page() {
       <PoliticsSection />
       <EntertainmentSection />
       <WorldSection/>
+      <SportsSection/>
     </>
   );
 }

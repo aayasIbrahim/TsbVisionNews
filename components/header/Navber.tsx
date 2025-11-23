@@ -19,7 +19,6 @@ interface NavMenuProps {
   specialItem: MenuItem;
   isMobile?: boolean;
 }
-
 const menuItems: MenuItem[] = [
   { name: "সর্বশেষ", href: "/" },
   { name: "রাজনীতি", href: "/politics" },
@@ -31,8 +30,6 @@ const menuItems: MenuItem[] = [
 ];
 
 const specialLink: MenuItem = { name: "ই-পেপার", href: "/" };
-
-
 
 const NavMenu: React.FC<NavMenuProps> = ({
   items,
