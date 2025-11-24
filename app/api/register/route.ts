@@ -1,4 +1,4 @@
-import connectDB from "@/libs/db";
+import connectDB from "@/lib/db";
 import User from "@/models/User";
 import bcrypt from "bcryptjs";
 
@@ -22,13 +22,10 @@ export async function POST(req: Request) {
     // ✅ Check if user already exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return new Response(
-        JSON.stringify({ message: "User already exists" }),
-        {
-          status: 400,
-          headers: { "Content-Type": "application/json" },
-        }
-      );
+      return new Response(JSON.stringify({ message: "User already exists" }), {
+        status: 400,
+        headers: { "Content-Type": "application/json" },
+      });
     }
 
     // ✅ Hash password
@@ -59,12 +56,9 @@ export async function POST(req: Request) {
     );
   } catch (error) {
     console.error("Register Error:", error);
-    return new Response(
-      JSON.stringify({ message: "Internal Server Error" }),
-      {
-        status: 500,
-        headers: { "Content-Type": "application/json" },
-      }
-    );
+    return new Response(JSON.stringify({ message: "Internal Server Error" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 }

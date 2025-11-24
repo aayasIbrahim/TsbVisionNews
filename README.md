@@ -15,47 +15,6 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
   "isFeatured": true
 }
 
-const mongoose = require('mongoose');
-
-const NewsSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true
-  },
-  summary: {
-    type: String,
-    required: true
-  },
-  content: {
-    type: String, // full article content (optional if you have summary only)
-  },
-  category: {
-    type: String, // e.g., "National", "International", "Sports"
-    required: true
-  },
-  imageSrc: {
-    type: String, // featured image URL
-  },
-  author: {
-    type: String,
-    default: "Admin"
-  },
-  publishedAt: {
-    type: Date,
-    default: Date.now
-  },
-  updatedAt: {
-    type: Date
-  },
-  tags: [String], // optional, for filtering or search
-  isFeatured: {
-    type: Boolean,
-    default: false
-  }
-});
-
-module.exports = mongoose.model('News', NewsSchema);
-
 
 First, run the development server:
 
