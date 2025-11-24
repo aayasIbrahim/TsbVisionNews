@@ -2,7 +2,7 @@
 import React from "react";
 import { MapPin, Phone, Mail, ChevronUp } from "lucide-react";
 import Image from "next/image";
-import Logo from "../header/Logo";
+import Logo from "../ui/Logo";
 
 const footerLinks = [
   ["সর্বশেষ", "বিশ্ব", "খেলা", "চাকরি"],

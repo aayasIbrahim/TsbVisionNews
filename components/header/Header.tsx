@@ -2,9 +2,6 @@
 import React, { useEffect, useState } from "react";
 import TopBar from "./TopBar";
 import NavBar from "./Navber";
-import NewsTicker from "./NewsTicker";
-import AdvertisementBanner from "./AdvertisementBanner";
-
 function Header() {
   const [isNavFixed, setIsNavFixed] = useState(false);
 
@@ -40,12 +37,6 @@ function Header() {
         }`}
       >
         <NavBar />
-      </div>
-
-      {/* Main scrollable content */}
-      <div className=""> 
-        <NewsTicker />
-        <AdvertisementBanner />
       </div>
     </header>
   );

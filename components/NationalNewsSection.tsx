@@ -7,13 +7,13 @@ import SidebarNewsCard from "./NationalNews/SidebarNewsCard";
 import { NationalNewsdata, NationalNewsdataAritcalData } from "@/data/Data";
 import AdCard from "./headlines/AdCard";
 import SectionHeader from "./ui/SectionHeader";
-import AdvertisementBanner from "./header/AdvertisementBanner";
+import AdvertisementBanner from "./AdvertisementBanner";
 
 const NationalNewsSection = () => {
   return (
     <section>
       <div className="container  mx-auto p-4 sm:p-6 font-sans min-h-screen">
-       <SectionHeader title="জাতীয়"/>
+        <SectionHeader title="জাতীয়" />
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <MainArticle {...NationalNewsdataAritcalData} />
 
@@ -37,7 +37,7 @@ const NationalNewsSection = () => {
             ></AdCard>
           </div>
         </div>
-        <AdvertisementBanner/>
+        <AdvertisementBanner />
       </div>
     </section>
   );

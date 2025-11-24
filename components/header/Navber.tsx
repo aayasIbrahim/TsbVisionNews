@@ -5,10 +5,9 @@ import AuthSection from "./Nav/AuthSection";
 import SocialIcons from "./Nav/SocialIcon";
 
 import { Menu, X } from "lucide-react";
+import Link from "next/link";
 
-// ----------------------
-// ⭐ Types
-// ----------------------
+
 interface MenuItem {
   name: string;
   href: string;
@@ -85,9 +84,9 @@ const NavBar: React.FC = () => {
               <ul className="flex space-x-6 whitespace-nowrap py-2">
                 {menuItems.map((item) => (
                   <li key={item.name}>
-                    <a href={item.href} className="hover:text-red-600">
+                    <Link href={item.href} className="hover:text-red-600">
                       {item.name}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>

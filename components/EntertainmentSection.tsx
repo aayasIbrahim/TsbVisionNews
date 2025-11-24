@@ -3,7 +3,7 @@ import React from "react";
 import SmallCard from "@/components/entertainment/SmallCard";
 import MainCard from "@/components/entertainment/MainCard";
 import SectionHeader from "./ui/SectionHeader";
-import AdvertisementBanner from "./header/AdvertisementBanner";
+import AdvertisementBanner from "./AdvertisementBanner";
 
 const DUMMY_DATA = [
   {

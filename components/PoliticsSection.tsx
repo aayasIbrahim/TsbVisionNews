@@ -5,7 +5,7 @@ import { DUMMY_DATA } from "@/data/politicsData";
 import VerticalArticleCard from "./politics/VerticalArticleCard";
 import AdCard from "./headlines/AdCard";
 import SectionHeader from "./ui/SectionHeader";
-import AdvertisementBanner from "./header/AdvertisementBanner";
+import AdvertisementBanner from "./AdvertisementBanner";
 
 const PoliticsSection: React.FC = () => {
   const { featuredArticle, miniArticles } = DUMMY_DATA;
@@ -43,7 +43,6 @@ const PoliticsSection: React.FC = () => {
             ))}
           </div>
         </div>
-
         <AdCard
           ad={{
             title: "ঈদ অফার",
@@ -52,7 +51,7 @@ const PoliticsSection: React.FC = () => {
           }}
         ></AdCard>
       </div>
-      <AdvertisementBanner/>
+      <AdvertisementBanner />
     </div>
   );
 };

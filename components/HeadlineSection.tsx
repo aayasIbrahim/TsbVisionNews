@@ -4,12 +4,8 @@ import SmallNewsCard from "@/components/headlines/SmallNewsCard";
 import AdCard from "@/components/headlines/AdCard";
 import PopularListItem from "@/components/headlines/PopularListItem";
 
-import {
-  topHeadline,
-  leftColumnNews,
-  rightSidebarList,
-} from "@/data/Data";
-import AdvertisementBanner from "./header/AdvertisementBanner";
+import { topHeadline, leftColumnNews, rightSidebarList } from "@/data/Data";
+import AdvertisementBanner from "./AdvertisementBanner";
 
 export default function HeaderSection() {
   return (
@@ -49,7 +45,7 @@ export default function HeaderSection() {
           ))}
         </div>
       </div>
-      <AdvertisementBanner/>
+      <AdvertisementBanner />
     </section>
   );
 }

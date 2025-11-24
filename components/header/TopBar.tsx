@@ -1,6 +1,6 @@
 import { getAllDates } from "@/utils/GetAlldate";
 import { CiSearch } from "react-icons/ci";
-import Logo from "./Logo";
+import Logo from "../ui/Logo";
 function TopBar() {
   return (
     <div className="container mx-auto flex flex-col sm:flex-row justify-between items-start sm:items-center px-5 py-4 gap-4">
