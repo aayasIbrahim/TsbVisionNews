@@ -7,7 +7,6 @@ import SocialIcons from "./Nav/SocialIcon";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 
-
 interface MenuItem {
   name: string;
   href: string;
@@ -42,14 +41,14 @@ const NavMenu: React.FC<NavMenuProps> = ({
   >
     {items.map((item) => (
       <li key={item.name}>
-        <a
+        <Link
           href={item.href}
           className={`text-black hover:text-red-600 transition font-medium sm:text-[18px] p-2 ${
             isMobile ? "block text-center w-full" : ""
           }`}
         >
           {item.name}
-        </a>
+        </Link>
       </li>
     ))}
 
@@ -65,7 +64,6 @@ const NavMenu: React.FC<NavMenuProps> = ({
     </li>
   </ul>
 );
-
 
 const NavBar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -84,9 +82,9 @@ const NavBar: React.FC = () => {
               <ul className="flex space-x-6 whitespace-nowrap py-2">
                 {menuItems.map((item) => (
                   <li key={item.name}>
-                    <Link href={item.href} className="hover:text-red-600">
+                    <a href={item.href} className="hover:text-red-600">
                       {item.name}
-                    </Link>
+                    </a>
                   </li>
                 ))}
               </ul>
@@ -108,7 +106,7 @@ const NavBar: React.FC = () => {
               <NavMenu items={menuItems} specialItem={specialLink} />
               <div className="flex items-center space-x-6">
                 <SocialIcons />
-                <AuthSection />
+                <AuthSection isOpen={isOpen} setIsOpen={setIsOpen} />
               </div>
             </div>
           </div>
@@ -120,12 +118,15 @@ const NavBar: React.FC = () => {
             isOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
           } bg-white  shadow-lg p-4`}
         >
-          <div className="flex flex-col space-y-4">
+          <div
+            className="flex flex-col space-y-4"
+            onClick={() => setIsOpen(!isOpen)}
+          >
             <NavMenu items={menuItems} specialItem={specialLink} isMobile />
             <div className="w-full h-px bg-gray-200" />
             <SocialIcons />
             <div className="pt-2 flex justify-center">
-              <AuthSection />
+              <AuthSection isOpen={isOpen} setIsOpen={setIsOpen} />
             </div>
           </div>
         </div>
