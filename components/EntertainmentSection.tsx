@@ -59,7 +59,6 @@ const EntertainmentSection: React.FC = () => {
               <li key={article._id}>
                 <SmallCard
                   article={{
-              
                     title: article.title,
                     image: article.imageSrc || "/placeholder.png",
                     summary: article.summary,
@@ -74,7 +73,6 @@ const EntertainmentSection: React.FC = () => {
             <div className="col-span-1 md:col-span-2">
               <MainCard
                 article={{
-           
                   title: mainArticle.title,
                   image: mainArticle.imageSrc || "/placeholder.png",
                   summary: mainArticle.summary,
@@ -89,7 +87,6 @@ const EntertainmentSection: React.FC = () => {
               <li key={article._id}>
                 <SmallCard
                   article={{
-      
                     title: article.title,
                     image: article.imageSrc || "/placeholder.png",
                     summary: article.summary,

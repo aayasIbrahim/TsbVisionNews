@@ -11,8 +11,7 @@ import AdvertisementBanner from "./AdvertisementBanner";
 export default function NationalNewsSection() {
   const [news, setNews] = useState<INews[] | undefined>(undefined); // undefined দিয়ে শুরু করা হলো
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null); // এরর হ্যান্ডেল করার জন্য স্টেট
-
+  const [error, setError] = useState<string | null>(null); 
   useEffect(() => {
     const fetchNews = async () => {
       setLoading(true);

@@ -21,7 +21,7 @@ export async function proxy(req: NextRequest) {
   // সব ঠিক → next
   return NextResponse.next();
 }
-
+//eisob route e user der access nai
 export const config = {
   matcher: [
     "/dashboard/:path*", 

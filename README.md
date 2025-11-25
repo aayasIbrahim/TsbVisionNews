@@ -1,50 +1,26 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+TSB News24 — Next.js Fullstack News Portal
 
-## Getting Started
+A modern full-stack Bangla news portal built using Next.js 14, NextAuth, MongoDB, and a fully functional Admin Panel with image upload, category management, and role-based access control.
 
-{
-  "title": "দুই ধাপে বিশ্ব ইজতেমা, তারিখ জানালেন স্বরাষ্ট্রমন্ত্রী",
-  "summary": "আগামী বছর দুই ধাপে বিশ্ব ইজতেমা অনুষ্ঠিত হবে প্রথম ধাপে ০২ জানুয়ারি থেকে ৫ ফেব্রুয়ারি পর্যন্ত এবং দ্বিতীয় পর্ব ৭ ফেব্রুয়ারি থেকে ১০ ফেব্রুয়ারি পর্যন্ত অনুষ্ঠিত হবে...",
-  "content": "পুরো নিউজের বিস্তারিত এখানে...",
-  "category": "National",
-  "imageSrc": "https://placehold.co/600x400/059669/ffffff?text=Ijtema+Ground",
-  "author": "Ayas Ibrahim",
-  "publishedAt": "2025-11-22T08:00:00+06:00",
-  "updatedAt": "2025-11-22T08:00:00+06:00",
-  "tags": ["Ijtema", "Dhaka", "Bangladesh"],
-  "isFeatured": true
-}
+admin@gmail.com
+password:12345678
 
 
-First, run the development server:
+🔐 Admin Panel Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Secure Login using NextAuth (JWT)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Role-based authentication (Admin / User)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Add News (title, summary, content, category, image upload)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Category Management
 
-## Learn More
+Edit / Delete news
 
-To learn more about Next.js, take a look at the following resources:
+Featured news toggle
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Admin-only routes protected by Middleware
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Dashboard overview
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
