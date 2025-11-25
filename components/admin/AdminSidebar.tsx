@@ -1,6 +1,6 @@
-"use client"
-import React, { useState } from 'react';
-import { usePathname } from 'next/navigation'; // Next.js App Router Hook for current path
+"use client";
+import React, { useState } from "react";
+import { usePathname } from "next/navigation"; // Next.js App Router Hook for current path
 import {
   MdDashboard,
   MdArticle,
@@ -9,7 +9,8 @@ import {
   MdLogout,
   MdMenu,
   MdClose,
-} from 'react-icons/md';
+  MdHome,
+} from "react-icons/md";
 
 // 1. Sidebar Link Data Structure (TypeScript)
 interface SidebarLink {
@@ -20,10 +21,11 @@ interface SidebarLink {
 }
 
 const SIDEBAR_LINKS: SidebarLink[] = [
-  { id: 1, label: 'ড্যাশবোর্ড', icon: MdDashboard, href: '/dashboard' },
-  { id: 2, label: 'Add News', icon: MdArticle, href: '/addnews' },
-  { id: 3, label: 'News list', icon: MdCategory, href: '/newslist' },
-  { id: 4, label: 'User', icon: MdPeople, href: '/users' },
+  { id: 1, label: "ড্যাশবোর্ড", icon: MdDashboard, href: "/dashboard" },
+  { id: 5, label: "Public Site", icon: MdHome, href: "/" },
+  { id: 2, label: "Add News", icon: MdArticle, href: "/addnews" },
+  { id: 3, label: "News list", icon: MdCategory, href: "/newslist" },
+  { id: 4, label: "User", icon: MdPeople, href: "/users" },
 ];
 
 const AdminSidebar: React.FC = () => {
@@ -41,8 +43,8 @@ const AdminSidebar: React.FC = () => {
         href={link.href}
         className={`flex items-center space-x-3 rtl:space-x-reverse p-3 text-sm font-medium transition duration-200 rounded-lg ${
           isActive
-            ? 'bg-green-600 text-white shadow-md'
-            : 'text-gray-300 hover:bg-gray-700'
+            ? "bg-green-600 text-white shadow-md"
+            : "text-gray-300 hover:bg-gray-700"
         }`}
       >
         <Icon className="w-5 h-5" />
@@ -60,7 +62,11 @@ const AdminSidebar: React.FC = () => {
         onClick={() => setIsOpen(!isOpen)}
         aria-label="Toggle navigation"
       >
-        {isOpen ? <MdClose className="w-6 h-6" /> : <MdMenu className="w-6 h-6" />}
+        {isOpen ? (
+          <MdClose className="w-6 h-6" />
+        ) : (
+          <MdMenu className="w-6 h-6" />
+        )}
       </button>
 
       {/* --- Overlay (Mobile Only) --- */}
@@ -75,7 +81,7 @@ const AdminSidebar: React.FC = () => {
       {/* --- Sidebar Container (Fixed Position) --- */}
       <aside
         className={`fixed top-0 left-0 h-full w-64 bg-gray-800 text-white p-5 space-y-8 z-50 shadow-2xl transition-transform duration-300 transform ${
-          isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0' // Responsive visibility logic
+          isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0" // Responsive visibility logic
         }`}
       >
         {/* Logo/Title */}
@@ -95,7 +101,7 @@ const AdminSidebar: React.FC = () => {
         <div className="absolute bottom-5 w-[calc(100%-40px)] space-y-2 border-t border-gray-700 pt-4">
           {/* <NavLink link={{ id: 99, label: 'সেটিংস', icon: MdSettings, href: '/admin/settings' }} /> */}
           <button
-            onClick={() => console.log('Logging out...')}
+            onClick={() => console.log("Logging out...")}
             className="w-full flex items-center space-x-3 rtl:space-x-reverse p-3 text-sm font-medium text-red-400 hover:bg-red-900/40 rounded-lg transition duration-200"
           >
             <MdLogout className="w-5 h-5" />
