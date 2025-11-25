@@ -16,13 +16,10 @@ export default function PublicLayout({
     <>
       {/* 1. Header (যা TopBar এবং স্ক্রলযোগ্য NavBar ধারণ করে) */}
       <Header /> 
-      
-      
       <main className=""> 
         {/* এই Padding-টপ NavBar-এর উচ্চতা অনুযায়ী দিন */}
         {children}
       </main>
-
       {/* 3. Footer */}
       <NewsFooter />
     </>

@@ -19,8 +19,16 @@ interface NavMenuProps {
   isMobile?: boolean;
 }
 
-const NavMenu: React.FC<NavMenuProps> = ({ items, specialItem, isMobile = false }) => (
-  <ul className={`flex ${isMobile ? "flex-col space-y-3" : "flex-row space-x-6"} items-center`}>
+const NavMenu: React.FC<NavMenuProps> = ({
+  items,
+  specialItem,
+  isMobile = false,
+}) => (
+  <ul
+    className={`flex ${
+      isMobile ? "flex-col space-y-3" : "flex-row space-x-6"
+    } items-center`}
+  >
     {items.map((item) => (
       <li key={item.name}>
         <Link
@@ -54,23 +62,23 @@ const NavBar: React.FC = () => {
   const isAdmin = role === "admin";
 
   // Dynamically create menu items based on role
-const menuItems: MenuItem[] = [
-  { name: "সর্বশেষ", href: "/" },
-  { name: "রাজনীতি", href: "/politics" },
-  { name: "জাতীয়", href: "/national" },
-  { name: "বাংলাদেশ", href: "/bangladesh" },
-  { name: "বিশ্ব", href: "/world" },
-  { name: "বাণিজ্য", href: "/business" },
-  { name: "খেলা", href: "/sports" },
+  const menuItems: MenuItem[] = [
+    { name: "সর্বশেষ", href: "/" },
+    { name: "রাজনীতি", href: "/politics" },
+    { name: "জাতীয়", href: "/national" },
+    { name: "বাংলাদেশ", href: "/bangladesh" },
+    { name: "বিশ্ব", href: "/world" },
+    { name: "বাণিজ্য", href: "/business" },
+    { name: "খেলা", href: "/sports" },
 
-  // Only show when admin = true
-  ...(isAdmin
-    ? [
-        { name: "সংবাদ যুক্ত করুন", href: "/admin/addnews", isAdmin: true },
-        { name: "অ্যাডমিন প্যানেল", href: "/admin/dashboard", isAdmin: true },
-      ]
-    : []),
-]
+    // Only show when admin = true
+    ...(isAdmin
+      ? [
+          { name: "অ্যাডমিন প্যানেল", href: "/dashboard", isAdmin: true },
+          { name: "সংবাদ যুক্ত করুন", href: "/addnews", isAdmin: true },
+        ]
+      : []),
+  ];
 
   const specialLink: MenuItem = { name: "ই-পেপার", href: "/" };
 
@@ -123,7 +131,10 @@ const menuItems: MenuItem[] = [
             isOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
           } bg-white shadow-lg p-4`}
         >
-          <div className="flex flex-col space-y-4" onClick={() => setIsOpen(false)}>
+          <div
+            className="flex flex-col space-y-4"
+            onClick={() => setIsOpen(false)}
+          >
             <NavMenu items={menuItems} specialItem={specialLink} isMobile />
             <div className="w-full h-px bg-gray-200" />
             <SocialIcons />

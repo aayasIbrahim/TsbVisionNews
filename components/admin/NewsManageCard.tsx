@@ -11,9 +11,9 @@ interface Props {
 
 const NewsManageCard = ({ item, onEdit, onDelete }: Props) => {
   return (
-    <div className="p-4 bg-white shadow rounded border">
-      <h3 className="text-xl font-semibold">শিরোনাম ঃ{item.title}</h3>
-      <p className="text-sm text-red-500">ক্যাটেগরি: {item.category}</p>
+    <div className="p-4 bg-white   border-b-[2px]">
+      <h2 className="text-sm text-red-500">ক্যাটেগরি: {item.category}</h2>
+      <h3 className="text-xl font-semibold mt-1">শিরোনাম ঃ{item.title}</h3>
 
       <p className="text-gray-600 mt-2">
         <span className="font-semibold text-black">সংক্ষিপ্ত বিবরণ :</span>

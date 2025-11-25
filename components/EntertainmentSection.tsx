@@ -1,54 +1,50 @@
-// components/EntertainmentSection.tsx
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import SmallCard from "@/components/entertainment/SmallCard";
 import MainCard from "@/components/entertainment/MainCard";
 import SectionHeader from "./ui/SectionHeader";
 import AdvertisementBanner from "./AdvertisementBanner";
+import { INews } from "@/types/news";
 
-const DUMMY_DATA = [
-  {
-    id: 1,
-    title: "এবার সিনেমার পর্দায় মির্জাপুর পাচ্ছেন স্বস্তিকা! (The Main Story)",
-    image: "/headliness/image (4).png",
-    isMain: true,
-    summary: "মুখ্য চরিত্র স্বস্তিকা এবার সিনেমার পর্দায় অভিনয় করবেন...",
-  },
-  {
-    id: 2,
-    title: "কেমন দেখতে পারেন জেমস বন্ডকে, জানালেন সায়েদ ",
-    image: "/headliness/image (4).png",
-  },
-  {
-    id: 3,
-    title: "এ নিয়ে ভক্তদের আর দ্বিধা নেই! ",
-    image: "/headliness/image (4).png",
-  },
-  {
-    id: 4,
-    title: "প্রিয় মানুষকে নিয়ে দারুণ মেজাজে মেহজাবিন ",
-    image: "/headliness/image (4).png",
-  },
-  {
-    id: 5,
-    title: "মিথুন চক্রবর্তীর ছবিতে শ্রাবণী মুখোপাধ্যায় ",
-    image: "/headliness/image (4).png",
-  },
-  {
-    id: 6,
-    title: "মমতার অভিনেত্রী প্রেরণা রয় ",
-    image: "/headliness/image (4).png",
-  },
-  {
-    id: 7,
-    title: "বড় পর্দায় আসছে ডায়েজের নতুন চমক ",
-    image: "/headliness/image (4).png",
-  },
-];
+const EntertainmentSection: React.FC = () => {
+  const [news, setNews] = useState<INews[]>([]);
+  const [loading, setLoading] = useState(false);
 
-const EntertainmentSection = () => {
-  const mainArticle = DUMMY_DATA.find((a) => a.isMain);
-  const leftArticles = DUMMY_DATA.filter((a) => a.id >= 2 && a.id <= 4);
-  const rightArticles = DUMMY_DATA.filter((a) => a.id >= 5 && a.id <= 7);
+  useEffect(() => {
+    const fetchNews = async () => {
+      setLoading(true);
+      try {
+        const res = await fetch("/api/news?category=বিনোদন");
+        if (!res.ok) throw new Error("Failed to fetch news");
+
+        const data = await res.json();
+
+        if (data.success && data.data.length > 0) {
+          setNews(data.data);
+        } else {
+          setNews([]);
+        }
+      } catch (err) {
+        console.error("Error fetching news:", err);
+        setNews([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchNews();
+  }, []);
+
+  if (loading) return <p className="text-center py-10">Loading...</p>;
+  if (!news.length) return <p className="text-center py-10">No news found.</p>;
+
+  // Main article: প্রথম article কে main ধরা হলো
+  const mainArticle = news[0];
+  // Left column: 2nd, 3rd, 4th
+  const leftArticles = news.slice(1, 4);
+  // Right column: 5th, 6th, 7th
+  const rightArticles = news.slice(4, 7);
 
   return (
     <section className="bg-[#19363D] py-10">
@@ -60,8 +56,15 @@ const EntertainmentSection = () => {
           {/* LEFT COLUMN */}
           <ul className="flex flex-col gap-4">
             {leftArticles.map((article) => (
-              <li key={article.id}>
-                <SmallCard article={article} />
+              <li key={article._id}>
+                <SmallCard
+                  article={{
+              
+                    title: article.title,
+                    image: article.imageSrc || "/placeholder.png",
+                    summary: article.summary,
+                  }}
+                />
               </li>
             ))}
           </ul>
@@ -69,15 +72,30 @@ const EntertainmentSection = () => {
           {/* CENTER MAIN ARTICLE */}
           {mainArticle && (
             <div className="col-span-1 md:col-span-2">
-              <MainCard article={mainArticle} />
+              <MainCard
+                article={{
+           
+                  title: mainArticle.title,
+                  image: mainArticle.imageSrc || "/placeholder.png",
+                  summary: mainArticle.summary,
+                }}
+              />
             </div>
           )}
 
           {/* RIGHT COLUMN */}
           <ul className="flex flex-col gap-4">
             {rightArticles.map((article) => (
-              <li key={article.id}>
-                <SmallCard article={article} isRightAligned={true} />
+              <li key={article._id}>
+                <SmallCard
+                  article={{
+      
+                    title: article.title,
+                    image: article.imageSrc || "/placeholder.png",
+                    summary: article.summary,
+                  }}
+                  isRightAligned={true}
+                />
               </li>
             ))}
           </ul>

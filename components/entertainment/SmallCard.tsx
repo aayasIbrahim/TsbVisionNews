@@ -5,11 +5,14 @@ import Image  from "next/image";
 interface Article {
   title: string;
   image: string;
+  summary?: string;
+
 }
 
 interface SmallCardProps {
   article: Article;
   isRightAligned?: boolean;
+
 }
 
 const SmallCard: React.FC<SmallCardProps> = ({ article, isRightAligned = false }) => {

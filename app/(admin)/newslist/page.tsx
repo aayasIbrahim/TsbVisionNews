@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 import { INews } from "@/types/news";
 import NewsManageCard from "@/components/admin/NewsManageCard";
 
@@ -19,37 +19,36 @@ const AllNewsPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState("all");
 
-  useEffect(() => {
-    const fetchNews = async () => {
-      try {
-        const res = await fetch("/api/news");
-        const data = await res.json();
-
-        if (data.success) {
-          setNews(data.data as INews[]);
-        }
-      } catch (error) {
-        console.error("Failed to fetch news:", error);
-      } finally {
-        setIsLoading(false);
+  const fetchNews = async (category: string) => {
+    setIsLoading(true);
+    try {
+      const url = new URL("/api/news", location.origin);
+      if (category && category !== "all") {
+        url.searchParams.append("category", category);
       }
-    };
 
-    fetchNews();
-  }, []);
+      const res = await fetch(url.toString());
+      const data = await res.json();
 
-  const filteredNews = useMemo(() => {
-    if (selectedCategory === "all") return news;
-    return news.filter((item) => item.category === selectedCategory);
-  }, [news, selectedCategory]);
-
-  // Edit handler
-  const handleEdit = (id: string) => {
-    alert("Edit pressed for ID: " + id);
-    // Example: router.push(`/news/edit/${id}`)
+      if (data.success) {
+        setNews(data.data as INews[]);
+      }
+    } catch (error) {
+      console.error("Failed to fetch news:", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  // Delete handler
+  useEffect(() => {
+    fetchNews(selectedCategory);
+  }, [selectedCategory]);
+
+  const handleEdit = (id: string) => {
+    alert("Edit pressed for ID: " + id);
+    // router.push(`/news/edit/${id}`);
+  };
+
   const handleDelete = async (id: string) => {
     const sure = confirm("আপনি কি নিশ্চিত যে আপনি এই সংবাদটি মুছে ফেলতে চান?");
     if (!sure) return;
@@ -63,7 +62,7 @@ const AllNewsPage = () => {
   };
 
   return (
-    <div className="max-w-7xl  p-5 lg:w-full">
+    <div className="max-w-7xl p-5 lg:w-full">
       <h2 className="text-2xl font-bold mb-4">সকল সংবাদ</h2>
 
       <div className="flex flex-wrap gap-3 mb-6">
@@ -84,11 +83,11 @@ const AllNewsPage = () => {
 
       {isLoading ? (
         <p>সংবাদ লোড হচ্ছে...</p>
-      ) : filteredNews.length === 0 ? (
+      ) : news.length === 0 ? (
         <p>কোনো সংবাদ পাওয়া যায়নি।</p>
       ) : (
         <div className="space-y-4">
-          {filteredNews.map((item) => (
+          {news.map((item) => (
             <NewsManageCard
               key={item._id}
               item={item}

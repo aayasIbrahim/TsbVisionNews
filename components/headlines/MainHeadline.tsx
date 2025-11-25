@@ -1,28 +1,21 @@
 "use client";
 import Image from "next/image";
-
-interface Headline {
-  id: number;
-  imageUrl: string;
-  title: string;
-  summary: string;
-}
+import { INews } from "@/types/news"; // তোমার INews type import করো
 
 interface MainHeadlineProps {
-  headlines: Headline[];
+  headlines: INews[];
 }
 
 // ------------------------------------------------------------------
 // Small Card (Other Headlines)
 // ------------------------------------------------------------------
-const HeadlineCard: React.FC<{ headline: Headline }> = ({ headline }) => {
+const HeadlineCard: React.FC<{ headline: INews }> = ({ headline }) => {
   return (
-    <div className=" p-6 border-b py-3 flex gap-3 items-start w-full">
-      
+    <div className="p-6 border-b py-3 flex gap-3 items-start w-full">
       {/* Image */}
       <div className="w-20 h-16 sm:w-24 sm:h-20 flex-shrink-0 rounded overflow-hidden cursor-pointer">
         <Image
-          src={headline.imageUrl}
+          src={headline.imageSrc} // INews এর imageSrc
           alt={headline.title}
           width={120}
           height={90}
@@ -54,11 +47,9 @@ const MainHeadline: React.FC<MainHeadlineProps> = ({ headlines }) => {
 
   return (
     <>
-    
       <div className="relative bg-white shadow-xl rounded-xl overflow-hidden mb-6">
-
         <Image
-          src={hero.imageUrl}
+          src={hero.imageSrc} // INews এর imageSrc
           alt={hero.title}
           width={1200}
           height={600}
@@ -80,11 +71,9 @@ const MainHeadline: React.FC<MainHeadlineProps> = ({ headlines }) => {
         </div>
       </div>
 
-    
       {/* OTHER HEADLINES */}
-      {/* ------------------------------------------------------------ */}
       {otherHeadlines.map((headline) => (
-        <HeadlineCard key={headline.id} headline={headline} />
+        <HeadlineCard key={headline._id} headline={headline} />
       ))}
     </>
   );
