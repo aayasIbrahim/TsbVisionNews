@@ -30,7 +30,7 @@ export default function HeaderSection() {
           const news: INews[] = data.data;
 
           // Left Column → latest 5 news
-          setLeftColumnNews(news.slice(0, 5));
+          setLeftColumnNews(news.slice(0, 3));
 
           // Top Headline → latest 3 news
           setTopHeadline(news.slice(0, 3));
