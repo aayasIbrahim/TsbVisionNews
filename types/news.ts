@@ -3,7 +3,7 @@ export interface INews {
   _id: string;
   title: string;
   summary: string;
-  content?: string;
+  content: string;
   category: string;
   imageSrc: string;
   author?: string;

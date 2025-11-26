@@ -1,104 +1,87 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useState } from "react";
+import NewsForm from "@/components/admin/NewsForm";
+import NewsList from "@/components/admin/NewsList";
 import { INews } from "@/types/news";
-import NewsManageCard from "@/components/admin/NewsManageCard";
 
-const allCategories = [
-  { name: "সব", value: "all" },
-  { name: "রাজনীতি", value: "রাজনীতি" },
-  { name: "জাতীয়", value: "জাতীয়" },
-  { name: "বাংলাদেশ", value: "বাংলাদেশ" },
-  { name: "বিশ্ব", value: "বিশ্ব" },
-  { name: "বাণিজ্য", value: "বাণিজ্য" },
-  { name: "খেলা", value: "খেলা" },
-];
+export default function NewListPage() {
+  const [selectedNews, setSelectedNews] = useState<INews | null>(null);
 
-const AllNewsPage = () => {
-  const [news, setNews] = useState<INews[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [selectedCategory, setSelectedCategory] = useState("all");
-
-  const fetchNews = async (category: string) => {
-    setIsLoading(true);
-    try {
-      const url = new URL("/api/news", location.origin);
-      if (category && category !== "all") {
-        url.searchParams.append("category", category);
-      }
-
-      const res = await fetch(url.toString());
-      const data = await res.json();
-
-      if (data.success) {
-        setNews(data.data as INews[]);
-      }
-    } catch (error) {
-      console.error("Failed to fetch news:", error);
-    } finally {
-      setIsLoading(false);
-    }
+  // ==============================
+  // NewsList থেকে edit click handle
+  // ==============================
+  const handleEditClick = (item: INews) => {
+    setSelectedNews(item);
   };
 
-  useEffect(() => {
-    fetchNews(selectedCategory);
-  }, [selectedCategory]);
-
-  const handleEdit = (id: string) => {
-    alert("Edit pressed for ID: " + id);
-    // router.push(`/news/edit/${id}`);
+  // ==============================
+  // NewsForm সফলভাবে submit হলে
+  // ==============================
+  const handleSuccess = () => {
+    setSelectedNews(null);
   };
 
+  // ==============================
+  // NewsForm modal বন্ধ করলে
+  // ==============================
+  const handleClose = () => {
+    setSelectedNews(null);
+  };
+
+  // ==============================
+  // News delete handle
+  // ==============================
   const handleDelete = async (id: string) => {
-    const sure = confirm("আপনি কি নিশ্চিত যে আপনি এই সংবাদটি মুছে ফেলতে চান?");
-    if (!sure) return;
+    if (!confirm("আপনি কি এই news মুছতে চান?")) return;
 
-    const res = await fetch(`/api/news/${id}`, { method: "DELETE" });
-    const data = await res.json();
+    try {
+      const res = await fetch(`/api/news/${id}`, {
+        method: "DELETE",
+      });
 
-    if (data.success) {
-      setNews((prev) => prev.filter((n) => n._id !== id));
+      if (!res.ok) throw new Error("Failed to delete news");
+
+      alert("News deleted successfully!");
+      // Optionally, refresh page or trigger NewsList refetch
+      window.location.reload(); // সরল উপায়
+    } catch (error) {
+      console.error("Delete Error:", error);
+      alert("News delete failed");
     }
   };
 
   return (
-    <div className="max-w-7xl p-5 lg:w-full">
-      <h2 className="text-2xl font-bold mb-4">সকল সংবাদ</h2>
+    <div className="min-h-screen px-4 sm:px-6 lg:px-10 py-10 relative bg-gray-200">
+      {/* ✅ News List */}
+      <NewsList onEditClick={handleEditClick} onDelete={handleDelete} />
 
-      <div className="flex flex-wrap gap-3 mb-6">
-        {allCategories.map((cat) => (
-          <button
-            key={cat.value}
-            onClick={() => setSelectedCategory(cat.value)}
-            className={`px-4 py-2 rounded-full text-sm font-medium border transition ${
-              selectedCategory === cat.value
-                ? "bg-blue-600 text-white border-blue-700"
-                : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-            }`}
-          >
-            {cat.name}
-          </button>
-        ))}
-      </div>
+      {/* ✅ Edit/Add Form Modal */}
+      {selectedNews && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          {/* Backdrop */}
+          <div
+            className="absolute inset-0 bg-white bg-opacity-50 transition-opacity"
+            onClick={handleClose}
+          ></div>
 
-      {isLoading ? (
-        <p>সংবাদ লোড হচ্ছে...</p>
-      ) : news.length === 0 ? (
-        <p>কোনো সংবাদ পাওয়া যায়নি।</p>
-      ) : (
-        <div className="space-y-4">
-          {news.map((item) => (
-            <NewsManageCard
-              key={item._id}
-              item={item}
-              onEdit={handleEdit}
-              onDelete={handleDelete}
+          {/* Modal */}
+          <div className="relative bg-white rounded-lg shadow-lg w-[95%] sm:w-[90%] md:w-[80%] max-w-2xl max-h-[90vh] overflow-y-auto p-6 animate-fadeIn scale-100">
+            <button
+              onClick={handleClose}
+              className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-2xl font-bold"
+            >
+              &times;
+            </button>
+
+            <NewsForm
+              initialData={selectedNews}
+              onSuccess={handleSuccess}
+              onClose={handleClose}
             />
-          ))}
+          </div>
         </div>
       )}
     </div>
   );
-};
-
-export default AllNewsPage;
+}
