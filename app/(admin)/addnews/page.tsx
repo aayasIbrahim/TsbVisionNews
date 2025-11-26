@@ -8,6 +8,7 @@ export default function AddNewsPage() {
 
   const handleSuccess = () => {
     router.push("/newslist");
+    
   };
   return <NewsForm initialData={null} onSuccess={handleSuccess} />;
 }

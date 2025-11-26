@@ -10,7 +10,7 @@ import { useDeleteNewsMutation } from "@/app/redux/features/news/newsApi"; // �
 export default function NewListPage() {
   const [selectedNews, setSelectedNews] = useState<INews | null>(null); // 🚀 RTK Query mutation hook ব্যবহার করুন
 
-  const [deleteNews, { isLoading: isDeleting, error: deleteError }] =
+  const [deleteNews, {  error: deleteError }] =
     useDeleteNewsMutation(); // ============================== // NewsList থেকে edit click handle // ==============================
 
   const handleEditClick = (item: INews) => {
@@ -45,12 +45,6 @@ export default function NewListPage() {
 
   return (
     <div className="min-h-screen px-4 sm:px-6 lg:px-10 py-10 relative bg-gray-200">
-      {isDeleting && (
-        <div className="fixed inset-0 bg-black bg-opacity-30 z-[60] flex items-center justify-center">
-          {" "}
-          <div className="text-white text-lg p-4 rounded-md bg-gray-800"></div>
-        </div>
-      )}
       {/* ✅ News List */}
       <NewsList onEditClick={handleEditClick} onDelete={handleDelete} /> 
       {/* ✅ Edit/Add Form Modal */}

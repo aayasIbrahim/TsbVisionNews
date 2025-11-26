@@ -5,27 +5,17 @@ export const newsApi = createApi({
   reducerPath: "newsApi",
   baseQuery: fetchBaseQuery({ baseUrl: "/api/news/" }),
   tagTypes: ["News"],
-
   endpoints: (builder) => ({
     // Get all news
     getNews: builder.query<INews[], string>({
       query: (category = "all") => `?category=${encodeURIComponent(category)}`,
-      providesTags: (result) =>
-        result
-          ? [
-              ...result.map((item) => ({
-                type: "News" as const,
-                id: item._id,
-              })),
-              { type: "News", id: "LIST" },
-            ]
-          : [{ type: "News", id: "LIST" }],
+      providesTags: ["News"],
     }),
 
     // Get single news
     getNewsById: builder.query<INews, string>({
       query: (id) => `${id}`,
-      providesTags: (result, error, id) => [{ type: "News", id }],
+      providesTags: ["News"],
     }),
 
     // Create news
@@ -35,7 +25,7 @@ export const newsApi = createApi({
         method: "POST",
         body,
       }),
-      invalidatesTags: [{ type: "News", id: "LIST" }],
+      invalidatesTags: ["News"],
     }),
 
     // Update news
@@ -45,7 +35,7 @@ export const newsApi = createApi({
         method: "PUT",
         body: data,
       }),
-      invalidatesTags: (result, error, { id }) => [{ type: "News", id }],
+      invalidatesTags: ["News"], // 🔑 UI auto refresh হবে
     }),
 
     // Delete news
@@ -54,10 +44,7 @@ export const newsApi = createApi({
         url: id,
         method: "DELETE",
       }),
-      invalidatesTags: (result, error, id) => [
-        { type: "News", id },
-        { type: "News", id: "LIST" },
-      ],
+      invalidatesTags: ["News"], // 🔑 UI auto refresh হবে
     }),
   }),
 });
