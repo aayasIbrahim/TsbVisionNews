@@ -1,5 +1,3 @@
-
-
 export interface INews {
   _id: string;
   title: string;
@@ -9,13 +7,14 @@ export interface INews {
   imageSrc: string;
   author?: string;
   publishedAt?: Date;
-  updatedAt?: Date;
+  createdAt: string;
   tags?: string[];
   isFeatured?: boolean;
+  updatedAt: string;
 }
 
 export interface INewsPayload {
-  _id?: string;            // Optional, only needed for updates
+  _id?: string; // Optional, only needed for updates
   title: string;
   summary: string;
   category: string;

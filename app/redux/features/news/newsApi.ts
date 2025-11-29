@@ -6,41 +6,49 @@ import {
   NewsApiResponse,
 } from "@/types/news";
 
+// Removed: interface GetNewsByIdResponse { data: INews; } - No longer needed
+
 export const newsApi = createApi({
   reducerPath: "newsApi",
   baseQuery: fetchBaseQuery({ baseUrl: "/api/news/" }),
   tagTypes: ["News"],
   endpoints: (builder) => ({
-    // Get all news
-    getNews: builder.query<NewsApiResponse, string | undefined>({
-      // <Response Type, Argument Type>
-
-      query: (category = "all") => {
-        const safeCategory = encodeURIComponent(category || "all");
-        return {
-          url: `?category=${safeCategory}`,
-          method: "GET",
-        };
-      },
-
-      // API response কে ক্যাশ করার জন্য tag
-      providesTags: ["News"],
+    // Get all news by category
+    getNews: builder.query<NewsApiResponse, string | void>({
+      query: (category = "all") => ({
+        url: `?category=${encodeURIComponent(category || "all")}`,
+        method: "GET",
+      }),
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.data.map(({ _id }) => ({
+                type: "News" as const,
+                id: _id,
+              })),
+              { type: "News", id: "LIST" },
+            ]
+          : [{ type: "News", id: "LIST" }],
     }),
 
-    // Get single news
+    // Get single news by ID (UPDATED)
     getNewsById: builder.query<INews, string>({
-      query: (id) => `${id}`,
-      providesTags: ["News"],
+      query: (id) => ({
+        url: id,
+        method: "GET",
+      }),
+      // --- REMOVED: transformResponse is removed to expect INews directly
+      providesTags: (result, error, id) => [{ type: "News", id }],
     }),
-
-    // Create news
+    
+    // Add news
     addNews: builder.mutation<INews, INewsPayload>({
       query: (body) => ({
         url: "",
         method: "POST",
         body,
       }),
-      invalidatesTags: ["News"],
+      invalidatesTags: [{ type: "News", id: "LIST" }],
     }),
 
     // Update news
@@ -50,7 +58,7 @@ export const newsApi = createApi({
         method: "PUT",
         body: data,
       }),
-      invalidatesTags: ["News"], // 🔑 UI auto refresh হবে
+      invalidatesTags: (result, error, { id }) => [{ type: "News", id }],
     }),
 
     // Delete news
@@ -59,7 +67,10 @@ export const newsApi = createApi({
         url: id,
         method: "DELETE",
       }),
-      invalidatesTags: ["News"], // 🔑 UI auto refresh হবে
+      invalidatesTags: (result, error, id) => [
+        { type: "News", id },
+        { type: "News", id: "LIST" },
+      ],
     }),
   }),
 });
