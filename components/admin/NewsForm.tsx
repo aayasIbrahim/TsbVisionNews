@@ -2,8 +2,11 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { uploadToCloudinary } from "@/utils/utils"; 
-import { useAddNewsMutation, useUpdateNewsMutation } from "@/app/redux/features/news/newsApi";
+import { uploadToCloudinary } from "@/utils/utils";
+import {
+  useAddNewsMutation,
+  useUpdateNewsMutation,
+} from "@/app/redux/features/news/newsApi";
 import { INewsPayload } from "@/types/news"; // <- payload type
 
 interface NewsData {
@@ -19,19 +22,30 @@ interface NewsData {
 interface NewsFormProps {
   initialData?: NewsData | null;
   onSuccess: () => void;
-  
 }
 
 const categories = [
-  { name: "রাজনীতি" }, { name: "জাতীয়" }, { name: "বাংলাদেশ" },
-  { name: "বিশ্ব" }, { name: "বাণিজ্য" }, { name: "খেলা" }, { name: "বিনোদন" },
+  { name: "রাজনীতি" },
+  { name: "জাতীয়" },
+  { name: "বাংলাদেশ" },
+  { name: "বিশ্ব" },
+  { name: "বাণিজ্য" },
+  { name: "খেলা" },
+  { name: "বিনোদন" },
 ];
 
 export default function NewsForm({ initialData, onSuccess }: NewsFormProps) {
   const isEditMode = !!initialData?._id;
 
   const [formData, setFormData] = useState<NewsData>(
-    initialData || { title: "", summary: "", category: "", content: "", imageSrc: "", isFeatured: false }
+    initialData || {
+      title: "",
+      summary: "",
+      category: "",
+      content: "",
+      imageSrc: "",
+      isFeatured: false,
+    }
   );
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState(initialData?.imageSrc || "");
@@ -47,11 +61,16 @@ export default function NewsForm({ initialData, onSuccess }: NewsFormProps) {
     }
   }, [initialData]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
     const { name, type, value } = e.target;
     let newValue: string | boolean = value;
-    if (type === "checkbox" && e.target instanceof HTMLInputElement) newValue = e.target.checked;
-    setFormData(prev => ({ ...prev, [name]: newValue }));
+    if (type === "checkbox" && e.target instanceof HTMLInputElement)
+      newValue = e.target.checked;
+    setFormData((prev) => ({ ...prev, [name]: newValue }));
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -63,7 +82,12 @@ export default function NewsForm({ initialData, onSuccess }: NewsFormProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.title || !formData.summary || !formData.category || !formData.content) {
+    if (
+      !formData.title ||
+      !formData.summary ||
+      !formData.category ||
+      !formData.content
+    ) {
       alert("সব ফিল্ড পূরণ করুন।");
       return;
     }
@@ -71,7 +95,6 @@ export default function NewsForm({ initialData, onSuccess }: NewsFormProps) {
       alert("একটি ছবি আপলোড করুন।");
       return;
     }
-
     try {
       setLoading(true);
       let uploadedImageUrl = formData.imageSrc;
@@ -97,7 +120,14 @@ export default function NewsForm({ initialData, onSuccess }: NewsFormProps) {
       } else {
         await addNews(submitData).unwrap();
         alert("সংবাদ সফলভাবে যুক্ত হয়েছে!");
-        setFormData({ title: "", summary: "", category: "", content: "", imageSrc: "", isFeatured: false });
+        setFormData({
+          title: "",
+          summary: "",
+          category: "",
+          content: "",
+          imageSrc: "",
+          isFeatured: false,
+        });
         setPreviewUrl("");
         setImageFile(null);
       }
@@ -112,50 +142,120 @@ export default function NewsForm({ initialData, onSuccess }: NewsFormProps) {
   };
 
   return (
-    <div className="max-w-2xl p-5 bg-white shadow">
-      <h2 className="text-2xl font-semibold mb-6">{isEditMode ? "সংবাদ সম্পাদনা করুন" : "সংবাদ যুক্ত করুন"}</h2>
-      <form onSubmit={handleSubmit}>
-        <ul className="space-y-4 list-none p-0">
-          <li>
-            <input type="text" name="title" placeholder="শিরোনাম" value={formData.title} onChange={handleChange} className="w-full border px-3 py-2 rounded" required />
-          </li>
-          <li>
-            <textarea name="summary" placeholder="সংক্ষিপ্ত বিবরণ" value={formData.summary} onChange={handleChange} className="w-full border px-3 py-2 rounded" required />
-          </li>
-          <li>
-            <select name="category" value={formData.category} onChange={handleChange} className="w-full border px-3 py-2 rounded" required>
-              <option value="">বিভাগ নির্বাচন করুন</option>
-              {categories.map(c => <option key={c.name} value={c.name}>{c.name}</option>)}
-            </select>
-          </li>
-          <li>
-            <textarea name="content" placeholder="বিস্তারিত সংবাদ" value={formData.content} onChange={handleChange} className="w-full border px-3 py-2 rounded h-32" />
-          </li>
-          <li>
-            <label className="flex items-center gap-2">
-              <input type="checkbox" name="isFeatured" checked={formData.isFeatured} onChange={handleChange} className="accent-blue-600" />
-              ফিচার্ড সংবাদ
-            </label>
-          </li>
-          <li>
-            <label className="block mb-1">ছবি আপলোড করুন</label>
-            <input type="file" accept="image/*" onChange={handleImageChange} className="w-full" />
-          </li>
-          {previewUrl && (
-            <li className="relative">
-              <Image src={previewUrl} alt="ছবি" width={300} height={200} className="rounded border object-cover" unoptimized={previewUrl.startsWith("blob:")} />
-              {imageFile && (
-                <button type="button" onClick={() => { setPreviewUrl(formData.imageSrc); setImageFile(null); }} className="absolute top-2 right-2 bg-red-600 text-white px-2 py-1 rounded-full text-sm">✕</button>
-              )}
+    <section className="container mx-auto">
+      <div className=" p-5 bg-white shadow">
+        <h2 className="text-2xl font-semibold mb-6">
+          {isEditMode ? "সংবাদ সম্পাদনা করুন" : "সংবাদ যুক্ত করুন"}
+        </h2>
+        <form onSubmit={handleSubmit}>
+          <ul className="space-y-4 list-none p-0">
+            <li>
+              <input
+                type="text"
+                name="title"
+                placeholder="শিরোনাম"
+                value={formData.title}
+                onChange={handleChange}
+                className="w-full border px-3 py-2 rounded"
+                required
+              />
             </li>
-          )}
-          <li>
-            <button type="submit" disabled={loading} className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 disabled:bg-gray-400">
-              {loading ? "আপলোড হচ্ছে..." : isEditMode ? "সংবাদ আপডেট করুন" : "সংবাদ যুক্ত করুন"}
-            </button>
-          </li>
-        </ul>
-      </form>
-    </div>
+            <li>
+              <textarea
+                name="summary"
+                placeholder="সংক্ষিপ্ত বিবরণ"
+                value={formData.summary}
+                onChange={handleChange}
+                className="w-full border px-3 py-2 rounded"
+                required
+              />
+            </li>
+            <li>
+              <select
+                name="category"
+                value={formData.category}
+                onChange={handleChange}
+                className="w-full border px-3 py-2 rounded"
+                required
+              >
+                <option value="">বিভাগ নির্বাচন করুন</option>
+                {categories.map((c) => (
+                  <option key={c.name} value={c.name}>
+                    {c.name}
+                  </option>
+                ))}
+              </select>
+            </li>
+            <li>
+              <textarea
+                name="content"
+                placeholder="বিস্তারিত সংবাদ"
+                value={formData.content}
+                onChange={handleChange}
+                className="w-full border px-3 py-2 rounded h-32"
+              />
+            </li>
+            <li>
+              <label className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  name="isFeatured"
+                  checked={formData.isFeatured}
+                  onChange={handleChange}
+                  className="accent-blue-600"
+                />
+                ফিচার্ড সংবাদ
+              </label>
+            </li>
+            <li>
+              <label className="block mb-1">ছবি আপলোড করুন</label>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+                className="w-full"
+              />
+            </li>
+            {previewUrl && (
+              <li className="relative">
+                <Image
+                  src={previewUrl}
+                  alt="ছবি"
+                  width={300}
+                  height={200}
+                  className="rounded border object-cover"
+                  unoptimized={previewUrl.startsWith("blob:")}
+                />
+                {imageFile && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setPreviewUrl(formData.imageSrc);
+                      setImageFile(null);
+                    }}
+                    className="absolute top-2 right-2 bg-red-600 text-white px-2 py-1 rounded-full text-sm"
+                  >
+                    ✕
+                  </button>
+                )}
+              </li>
+            )}
+            <li>
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 disabled:bg-gray-400"
+              >
+                {loading
+                  ? "আপলোড হচ্ছে..."
+                  : isEditMode
+                  ? "সংবাদ আপডেট করুন"
+                  : "সংবাদ যুক্ত করুন"}
+              </button>
+            </li>
+          </ul>
+        </form>
+      </div>
+    </section>
   );
 }

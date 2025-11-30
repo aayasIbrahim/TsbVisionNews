@@ -51,7 +51,7 @@ const NewsDetailPage: React.FC = () => {
 
         {news.author && (
           <p className="text-gray-500">
-            লেখক: <span className="font-semibold">{news.author}</span>
+            লেখক: <span className="font-semibold">এম ডি বাইজীদ</span>
           </p>
         )}
 

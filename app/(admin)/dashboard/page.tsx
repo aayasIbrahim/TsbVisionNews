@@ -61,6 +61,20 @@ const Dashboard = () => {
           icon={FiList} 
           color="green-500" 
         />
+        <MetricCard 
+          title="ADS"
+          // totalCategoryCount ব্যবহার করা হচ্ছে
+          value={0}
+          icon={FiList} 
+          color="teal-500" 
+        />
+        <MetricCard 
+          title="Total user"
+          // totalCategoryCount ব্যবহার করা হচ্ছে
+          value={1}
+          icon={FiList} 
+          color="red-500" 
+        />
         
         {/* You can add more cards here */}
       </div>
