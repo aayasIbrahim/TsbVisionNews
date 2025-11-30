@@ -39,7 +39,8 @@ const Dashboard = () => {
 
   // 4. Component Render
   return (
-    <div className="container mx-auto">
+   <section>
+     <div className="container mx-auto">
       <h1 className="text-2xl font-semibold text-gray-800 mb-6">
         Admin Overview
       </h1>
@@ -72,6 +73,7 @@ const Dashboard = () => {
         {/* You can add more cards here */}
       </div> 
     </div>
+   </section>
   );
 };
 

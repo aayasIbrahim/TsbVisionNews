@@ -31,7 +31,7 @@ const MetricCard: FC<MetricCardProps> = ({
       : "text-gray-500";
 
   return (
-    <div className="p-5 bg-white rounded-xl shadow-md border border-gray-100 hover:shadow-xl transition duration-300 group">
+    <div className="p-9 bg-white rounded-xl shadow-md border border-gray-100 hover:shadow-xl transition duration-300 group h-[300px]">
       <div className="flex items-center justify-between">
         {/* Icon Wrapper */}
         <div
