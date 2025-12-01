@@ -7,6 +7,7 @@ import AdCard from "@/components/headlines/AdCard";
 import PopularListItem from "@/components/headlines/PopularListItem";
 import AdvertisementBanner from "./AdvertisementBanner";
 import { INews } from "@/types/news";
+import VideoPlayer from "@/components/ui/Videoplayer";
 
 interface Ad {
   title: string;
@@ -71,6 +72,7 @@ export default function HeaderSection() {
 
         {/* Center */}
         <div className="md:col-span-2">
+          <VideoPlayer />
           <MainHeadline headlines={topHeadline} />
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
             {/* Future center block components */}

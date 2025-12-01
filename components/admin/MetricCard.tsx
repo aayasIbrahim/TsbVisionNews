@@ -1,4 +1,4 @@
-// MetricCard.tsx (Improved Professional Version)
+
 import React, { FC } from "react";
 
 interface MetricCardProps {
