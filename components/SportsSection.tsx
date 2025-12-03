@@ -1,39 +1,20 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import LeftStackedCard from "../components/sports/LeftStackedCard";
 import MainCenterSportsCard from "../components/sports/MainCenterSportsCard";
 import RightSmallHorizontalCard from "../components/sports/RightSmallHorizontalCard";
 import SectionHeader from "./ui/SectionHeader";
-import { INews } from "@/types/news";
+import { useGetNewsQuery } from "@/app/redux/features/news/newsApi";
+
 
 const SportsSection: React.FC = () => {
-  const [news, setNews] = useState<INews[]>([]);
-  const [loading, setLoading] = useState(false);
+  const { data, isLoading, error } = useGetNewsQuery("খেলা");
+  const news=data?.data||[];
 
-  useEffect(() => {
-    const fetchSportsNews = async () => {
-      setLoading(true);
-      try {
-        const res = await fetch("/api/news?category=খেলা");
-        const data = await res.json();
-
-        if (data.success) {
-          setNews(data.data);
-        }
-      } catch (err) {
-        console.error("Sports API Error:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchSportsNews();
-  }, []);
-
-  if (loading) return <p className="text-center py-10">Loading sports news...</p>;
+  if ( isLoading) return <p className="text-center py-10">Loading sports news...</p>;
   if (!news.length) return <p className="text-center py-10">No sports news found.</p>;
-
+ if (error) return <p className="text-center py-10 text-red-400">Failed to load news.</p>;
   // Distribute Layout Sections
   const leftTwo = news.slice(0, 2);         // Left 2 articles
   const centerMain = news[2];               // Center main article

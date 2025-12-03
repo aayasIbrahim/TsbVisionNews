@@ -63,6 +63,7 @@ export default function HeaderSection() {
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {/* Left Column */}
         <div className="bg-white p-4">
+           <VideoPlayer />
           <h2 className="text-xl font-bold mb-3">সর্বশেষ খবর</h2>
 
           {leftColumnNews.map((news, i) => (
@@ -72,7 +73,7 @@ export default function HeaderSection() {
 
         {/* Center */}
         <div className="md:col-span-2">
-          <VideoPlayer />
+         
           <MainHeadline headlines={topHeadline} />
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
             {/* Future center block components */}

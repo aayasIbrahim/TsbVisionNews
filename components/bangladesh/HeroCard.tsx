@@ -31,7 +31,7 @@ const HeroCard: React.FC<HeroCardProps> = ({ article }) => {
         </div>
 
         {/* Gradient overlay + title */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent p-6 flex items-end">
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent p-6 flex items-end ">
           <h2 className="text-white text-2xl sm:text-3xl md:text-4xl font-bold leading-tight">
             {article.title}
           </h2>

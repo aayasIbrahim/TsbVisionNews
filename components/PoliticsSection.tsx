@@ -1,64 +1,47 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ArticleCard from "./politics/ArticaleCard";
 import FeaturedArticle from "./politics/FeaturedArticle";
 import VerticalArticleCard from "./politics/VerticalArticleCard";
 import AdCard from "./headlines/AdCard";
 import SectionHeader from "./ui/SectionHeader";
 import AdvertisementBanner from "./AdvertisementBanner";
-import { INews } from "@/types/news";
+import { useGetNewsQuery } from "@/app/redux/features/news/newsApi";
 
 const PoliticsSection: React.FC = () => {
-  const [news, setNews] = useState<INews[]>([]);
-  const [loading, setLoading] = useState(false);
+  // RTK Query → Fetch news based on category "রাজনীতি"
+  const { data, isLoading, error } = useGetNewsQuery("রাজনীতি");
 
-  useEffect(() => {
-    const fetchPoliticsNews = async () => {
-      setLoading(true);
-      try {
-        const res = await fetch("/api/news?category=রাজনীতি");
-        const data = await res.json();
+  const news = data?.data || [];
 
-        if (data.success) {
-          setNews(data.data);
-        }
-      } catch (error) {
-        console.error("Politics API Error:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchPoliticsNews();
-  }, []);
-
-  if (loading) return <p className="text-center py-10">Loading...</p>;
+  if (isLoading) return <p className="text-center py-10">Loading...</p>;
+  if (error) return <p className="text-center py-10 text-red-500">Failed to load politics news.</p>;
   if (!news.length) return <p className="text-center py-10">No Politics News Found.</p>;
 
-  // Structure:
-  const featuredArticle = news[0];        // Hero Article
-  const miniArticles = news.slice(1);     // Rest mini cards
+  // Structure
+  const featuredArticle = news[0];
+  const miniArticles = news.slice(1);
 
-  // Top 2 → horizontal ArticleCard
+  // Top 2 horizontal cards
   const leftColumnArticles = miniArticles.slice(0, 2);
 
-  // Bottom 2 → vertical ArticleCard
+  // Bottom 2 vertical cards
   const bottomColumnArticles = miniArticles.slice(2, 4);
 
   return (
     <div className="container mx-auto px-4 py-6 font-sans bg-white min-h-screen">
-      
+
       <SectionHeader title="রাজনীতি" />
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-        
+
         {/* LEFT CONTENT */}
         <div className="lg:col-span-3">
-          
+
           {/* FEATURED HERO ARTICLE */}
           <FeaturedArticle
-          id={featuredArticle._id}
+            id={featuredArticle._id}
             title={featuredArticle.title}
             summary={featuredArticle.summary}
             image={featuredArticle.imageSrc || "/placeholder.png"}

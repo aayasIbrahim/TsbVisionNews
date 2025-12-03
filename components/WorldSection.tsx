@@ -1,40 +1,21 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import BasicCard from "@/components/world/BasicCard";
 import SideSmallCard from "@/components/world/SideSmallCard";
 import MediumCard from "@/components/world/MediumCard";
 import LargeLeftCard from "@/components/world/LargeLeftCard";
 import SectionHeader from "./ui/SectionHeader";
+import { useGetNewsQuery } from "@/app/redux/features/news/newsApi";
 import { INews } from "@/types/news";
 
 const WorldSection: React.FC = () => {
-  const [news, setNews] = useState<INews[]>([]);
-  const [loading, setLoading] = useState(false);
+  const { data, isLoading, error } = useGetNewsQuery("বিশ্ব")
 
-  useEffect(() => {
-    const fetchWorldNews = async () => {
-      setLoading(true);
-      try {
-        const res = await fetch("/api/news?category=বিশ্ব");
-        const data = await res.json();
-
-        if (data.success) {
-          setNews(data.data);
-        }
-      } catch (error) {
-        console.error("World API Error:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchWorldNews();
-  }, []);
-
-  if (loading) return <p className="text-center py-10">Loading...</p>;
-  if (!news.length) return <p className="text-center py-10">No World News Found.</p>;
-
+  if (isLoading) return <p className="text-center p-10">Loading national news...</p>;
+  if (error) return <p className="text-center p-10 text-red-600">Error loading national news</p>;
+  if (!data || !data.data.length) return <p className="text-center p-10">No national news found.</p>;
+ const news: INews[] = data.data;
   // ------- Article Structure -------
   const [
     largeLeft,       // Big Left Card
