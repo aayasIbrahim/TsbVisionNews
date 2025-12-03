@@ -5,6 +5,7 @@ import CommerceMainCard from "@/components/commerce/CommerceMainCard";
 import CommerceStandardCard from "@/components/commerce/CommerceStandardCard";
 import SectionHeader from "./ui/SectionHeader";
 import { useGetNewsQuery } from "@/app/redux/features/news/newsApi";
+import FullScreenLoading from "./ui/FullScreenLoading";
 
 const CommerceSection: React.FC = () => {
   // RTK Query call
@@ -12,7 +13,7 @@ const CommerceSection: React.FC = () => {
 
   const news = data?.data || [];
 
-  if (isLoading) return <p className="text-center py-10">Loading...</p>;
+  
   if (error) return <p className="text-center py-10 text-red-600">Failed to load news.</p>;
   if (!news.length) return <p className="text-center py-10">No news found.</p>;
 
@@ -22,6 +23,7 @@ const CommerceSection: React.FC = () => {
   return (
     <section className="bg-white min-h-screen">
       <div className="p-4 sm:p-8 container mx-auto">
+        {isLoading && <FullScreenLoading/>}
 
         {/* Section Header */}
         <SectionHeader title="বাণিজ্য" />

@@ -6,14 +6,17 @@ import StandardArticleCard from "@/components/bangladesh/StandardArticleCard";
 import MostReadItemComponent from "@/components/bangladesh/MostReadItemComponent";
 import SectionHeader from "./ui/SectionHeader";
 import { useGetNewsQuery } from "@/app/redux/features/news/newsApi";
+import FullScreenLoading from "./ui/FullScreenLoading";
 
 const BangladeshSection: React.FC = () => {
   const { data, isLoading, error } = useGetNewsQuery("বাংলাদেশ");
 
   const news = data?.data || [];
 
-  if (isLoading) return <p className="text-center py-10">Loading...</p>;
-  if (error) return <p className="text-center py-10 text-red-600">Failed to load news.</p>;
+  if (error)
+    return (
+      <p className="text-center py-10 text-red-600">Failed to load news.</p>
+    );
   if (!news.length) return <p className="text-center py-10">No news found.</p>;
 
   // Structure
@@ -31,15 +34,12 @@ const BangladeshSection: React.FC = () => {
     <section className="bg-white min-h-screen">
       <div className="p-4 sm:p-8 container mx-auto">
         <SectionHeader title="বাংলাদেশ" />
-
+        {isLoading && <FullScreenLoading />}
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-12">
-
           {/* LEFT SIDE */}
           <div className="md:col-span-2 lg:col-span-9 flex flex-col gap-6">
-
             {/* HERO SECTION */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-
               <div className="col-span-1 md:col-span-2">
                 <HeroCard
                   article={{
@@ -50,7 +50,6 @@ const BangladeshSection: React.FC = () => {
                   }}
                 />
               </div>
-
             </div>
 
             {/* STANDARD ARTICLES */}
@@ -67,7 +66,6 @@ const BangladeshSection: React.FC = () => {
                 />
               ))}
             </div>
-
           </div>
 
           {/* RIGHT SIDEBAR → MOST READ */}
@@ -78,7 +76,6 @@ const BangladeshSection: React.FC = () => {
               ))}
             </div>
           </div>
-
         </div>
       </div>
     </section>

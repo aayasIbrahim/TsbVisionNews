@@ -5,6 +5,7 @@ import SmallCard from "@/components/entertainment/SmallCard";
 import MainCard from "@/components/entertainment/MainCard";
 import SectionHeader from "./ui/SectionHeader";
 import AdvertisementBanner from "./AdvertisementBanner";
+import FullScreenLoading from "./ui/FullScreenLoading";
 import { useGetNewsQuery } from "@/app/redux/features/news/newsApi";
 
 const EntertainmentSection: React.FC = () => {
@@ -13,7 +14,7 @@ const EntertainmentSection: React.FC = () => {
 
   const news = data?.data || [];
 
-  if (isLoading) return <p className="text-center py-10 text-white">Loading...</p>;
+  
   if (error) return <p className="text-center py-10 text-red-400">Failed to load news.</p>;
   if (!news.length) return <p className="text-center py-10 text-white">No news found.</p>;
 
@@ -24,7 +25,7 @@ const EntertainmentSection: React.FC = () => {
   return (
     <section className="bg-[#19363D] py-10">
       <div className="container mx-auto px-4">
-        
+          {isLoading && <FullScreenLoading/>}
         {/* Section Title */}
         <SectionHeader title="বিনোদন" className="text-white" />
 

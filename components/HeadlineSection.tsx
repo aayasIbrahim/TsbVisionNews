@@ -8,6 +8,7 @@ import PopularListItem from "@/components/headlines/PopularListItem";
 import AdvertisementBanner from "./AdvertisementBanner";
 import { INews } from "@/types/news";
 import VideoPlayer from "@/components/ui/Videoplayer";
+import FullScreenLoading from "./ui/FullScreenLoading";
 
 interface Ad {
   title: string;
@@ -50,7 +51,7 @@ export default function HeaderSection() {
     fetchNews();
   }, []);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <FullScreenLoading />
 
   const ad: Ad = {
     title: "ঈদ অফার",
@@ -60,6 +61,7 @@ export default function HeaderSection() {
 
   return (
     <section className="py-5 sm:py-12">
+        {loading&&<FullScreenLoading />}
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {/* Left Column */}
         <div className="bg-white p-4">

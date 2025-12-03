@@ -5,6 +5,7 @@ import LeftStackedCard from "../components/sports/LeftStackedCard";
 import MainCenterSportsCard from "../components/sports/MainCenterSportsCard";
 import RightSmallHorizontalCard from "../components/sports/RightSmallHorizontalCard";
 import SectionHeader from "./ui/SectionHeader";
+import FullScreenLoading from "./ui/FullScreenLoading";
 import { useGetNewsQuery } from "@/app/redux/features/news/newsApi";
 
 
@@ -12,7 +13,6 @@ const SportsSection: React.FC = () => {
   const { data, isLoading, error } = useGetNewsQuery("খেলা");
   const news=data?.data||[];
 
-  if ( isLoading) return <p className="text-center py-10">Loading sports news...</p>;
   if (!news.length) return <p className="text-center py-10">No sports news found.</p>;
  if (error) return <p className="text-center py-10 text-red-400">Failed to load news.</p>;
   // Distribute Layout Sections
@@ -25,7 +25,7 @@ const SportsSection: React.FC = () => {
       <div className="p-4 sm:p-8 container mx-auto">
         
         <SectionHeader title="খেলা" />
-
+  {isLoading && <FullScreenLoading/>}
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
           
           {/* LEFT COLUMN — 2 stacked cards */}

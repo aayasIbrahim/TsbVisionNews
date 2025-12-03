@@ -7,6 +7,7 @@ import MainArticle from "./NationalNews/MainArticle";
 import SidebarNewsCard from "./NationalNews/SidebarNewsCard";
 import AdCard from "./headlines/AdCard";
 import AdvertisementBanner from "./AdvertisementBanner";
+import FullScreenLoading from "./ui/FullScreenLoading";
 import { INews } from "@/types/news";
 
 
@@ -14,7 +15,7 @@ const NationalNewsSection: React.FC = () => {
   const { data, isLoading, error } = useGetNewsQuery("জাতীয়"); // category "জাতীয়"
 
   // Safety checks
-  if (isLoading) return <p className="text-center p-10">Loading national news...</p>;
+  
   if (error) return <p className="text-center p-10 text-red-600">Error loading national news</p>;
   if (!data || !data.data.length) return <p className="text-center p-10">No national news found.</p>;
 
@@ -28,6 +29,7 @@ const NationalNewsSection: React.FC = () => {
       <SectionHeader title="জাতীয়" />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {isLoading && <FullScreenLoading/>}
         {/* Main Article */}
         <MainArticle {...main}   id={main._id}/>
 

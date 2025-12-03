@@ -7,7 +7,9 @@ import VerticalArticleCard from "./politics/VerticalArticleCard";
 import AdCard from "./headlines/AdCard";
 import SectionHeader from "./ui/SectionHeader";
 import AdvertisementBanner from "./AdvertisementBanner";
+import FullScreenLoading from "./ui/FullScreenLoading";
 import { useGetNewsQuery } from "@/app/redux/features/news/newsApi";
+
 
 const PoliticsSection: React.FC = () => {
   // RTK Query → Fetch news based on category "রাজনীতি"
@@ -15,7 +17,7 @@ const PoliticsSection: React.FC = () => {
 
   const news = data?.data || [];
 
-  if (isLoading) return <p className="text-center py-10">Loading...</p>;
+
   if (error) return <p className="text-center py-10 text-red-500">Failed to load politics news.</p>;
   if (!news.length) return <p className="text-center py-10">No Politics News Found.</p>;
 
@@ -33,6 +35,7 @@ const PoliticsSection: React.FC = () => {
     <div className="container mx-auto px-4 py-6 font-sans bg-white min-h-screen">
 
       <SectionHeader title="রাজনীতি" />
+        {isLoading && <FullScreenLoading/>}
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
 
