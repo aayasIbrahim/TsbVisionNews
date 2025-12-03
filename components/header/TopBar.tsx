@@ -18,7 +18,7 @@ function TopBar() {
 
         {/* Search */}
         <div className="mt-2 sm:mt-[20px] w-full sm:w-[380px] sm:ms-auto">
-          <div className="flex w-full">
+          {/* <div className="flex w-full">
             <input
               type="text"
               placeholder="যা খুঁজতে চান"
@@ -27,7 +27,7 @@ function TopBar() {
             <button className="bg-gray-500 text-white px-4 py-2 rounded-r-md hover:bg-gray-600 transition flex items-center justify-center">
               <CiSearch size={20} />
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
