@@ -1,9 +1,5 @@
 "use client";
-<<<<<<< HEAD
 
-
-=======
->>>>>>> 34aaba06f72fa18ae90bcefdc6cceed171120473
 import MainHeadline from "@/components/headlines/MainHeadline";
 import SmallNewsCard from "@/components/headlines/SmallNewsCard";
 // import AdCard from "@/components/headlines/AdCard";
@@ -32,13 +28,6 @@ export default function HeaderSection() {
       ? news.filter((n) => n.isFeatured).slice(7, 9)
       : news.slice(3, 8);
 
-<<<<<<< HEAD
-  
-
-
-
-=======
->>>>>>> 34aaba06f72fa18ae90bcefdc6cceed171120473
   // const ad: Ad = {
   //   title: "ঈদ অফার",
   //   details: "বিশেষ ছাড়!",
