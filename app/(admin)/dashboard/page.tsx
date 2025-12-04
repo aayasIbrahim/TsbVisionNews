@@ -5,23 +5,16 @@ import { FiFileText, FiFolder, FiMonitor, FiUsers } from "react-icons/fi";
 import { useGetNewsQuery } from "@/app/redux/features/news/newsApi";
 import { useGetUsersQuery } from "@/app/redux/features/user/userApi";
 
-// Type for user API
-interface UserData {
-  totalUser: number;
-  users?: {
-    _id: string;
-    name: string;
-    email: string;
-  }[];
-}
-
 const Dashboard = () => {
-  const { data: newsData, isLoading: isNewsLoading, isError: isNewsError } =
-    useGetNewsQuery("all");
+  const {
+    data: newsData,
+    isLoading: isNewsLoading,
+    isError: isNewsError,
+  } = useGetNewsQuery("all");
 
   const { data: user } = useGetUsersQuery();
 
-  const userCount: number = (user as UserData)?.totalUser  || 0;
+  const userCount = user?.totalUser || 0;
 
   const isLoading = isNewsLoading;
   const isError = isNewsError;
@@ -47,7 +40,7 @@ const Dashboard = () => {
   return (
     <section>
       <div className="container mx-auto">
-        <h1 className="text-2xl font-semibold text-gray-800 mb-6">
+        <h1 className="text-2xl text-center font-semibold text-gray-800 mb-6">
           Admin Overview
         </h1>
 
@@ -62,7 +55,7 @@ const Dashboard = () => {
             title="Total Categories"
             value={7}
             icon={FiFolder}
-            color="green-500"
+            color="teal-500"
           />
           <MetricCard title="ADS" value={0} icon={FiMonitor} color="teal-500" />
           <MetricCard

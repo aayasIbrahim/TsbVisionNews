@@ -3,6 +3,7 @@ import { IUser } from "@/types/user";
 
 export interface IGetUsersResponse {
   users: IUser[];
+  totalUser: number;
 }
 
 export interface IUpdateRoleRequest {

@@ -75,7 +75,8 @@ const NewsFooter = () => {
               <ul className="space-y-3 text-sm mb-6">
                 <li className="flex items-center justify-center md:justify-end">
                   <MapPin size={16} className="mr-2 flex-shrink-0" />
-                  আশুলিয়া বাসস্ট্যান্ড, সাভার, ঢাকা ১৩৪০
+                 বঙ্গবন্ধু রোড, আশুলিয়া বাস স্ট্যান্ড, আশুলিয়া, সাভার, ঢাকা।
+
                 </li>
                 <li className="flex items-center justify-center md:justify-end">
                   <Phone size={16} className="mr-2 flex-shrink-0" />
