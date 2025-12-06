@@ -5,18 +5,24 @@ import {
   useDeleteAdMutation,
 } from "@/app/redux/features/ads/adsApi";
 import { Ad } from "@/types/ads";
+
 interface AdsListProps {
   setSelectedAd: (ad: Ad) => void;
 }
+
 export default function AdsList({ setSelectedAd }: AdsListProps) {
-  const { data: ads, isLoading } = useGetAdsQuery();
+  const { data, isLoading, isError } = useGetAdsQuery();
   const [deleteAd] = useDeleteAdMutation();
 
+  // Extract the array safely
+  const adsArray: Ad[] = data?.ads || [];
+
   if (isLoading) return <p>Loading...</p>;
+  if (isError || adsArray.length === 0) return <p>No ads found.</p>;
 
   return (
     <div className="p-6 space-y-4">
-      {ads?.map((ad) => (
+      {adsArray.map((ad) => (
         <div
           key={ad._id}
           className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 bg-white shadow rounded space-y-3 sm:space-y-0 sm:space-x-4"
@@ -43,7 +49,6 @@ export default function AdsList({ setSelectedAd }: AdsListProps) {
 
           {/* Action Buttons */}
           <div className="flex space-x-2">
-            {/* Edit Button */}
             <button
               onClick={() => setSelectedAd(ad)}
               className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
@@ -51,7 +56,6 @@ export default function AdsList({ setSelectedAd }: AdsListProps) {
               Edit
             </button>
 
-            {/* Delete Button */}
             <button
               onClick={() => deleteAd(ad._id!)}
               className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
