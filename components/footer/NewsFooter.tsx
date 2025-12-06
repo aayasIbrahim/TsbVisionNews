@@ -5,16 +5,28 @@ import Image from "next/image";
 import Logo from "../ui/Logo";
 
 const footerLinks = [
-  ["সর্বশেষ", "বিশ্ব", "খেলা", "চাকরি"],
-  ["রাজনীতি", "অপরাধ", "বিজ্ঞান", "জীবনযাপন"],
-  ["বাংলাদেশ", "বাণিজ্য", "মতামত", "প্রযুক্তি"],
+  {
+    title: "সর্বশেষ",
+    links: [
+      { name: "বিশ্ব", href: "/world" },
+      { name: "খেলা", href: "/sports" },
+      { name: "বিনোদন", href: "/entertainment" },
+    ],
+  },
+  {
+    title: "বাংলাদেশ",
+    links: [
+      { name: "বাণিজ্য", href: "/business" },
+      { name: "জাতীয়", href: "/national" },
+      { name: "রাজনীতি", href: "/politics" },
+    ],
+  },
 ];
 
 const bottomLinks = [
   { name: "বিজ্ঞাপন", href: "/ad" },
   { name: "শর্তাবলি ও নীতিমালা", href: "/termsAndPolicies" },
   { name: "গোপনীয়তা নীতি", href: "/privacy" },
-
 ];
 
 const NewsFooter = () => {
@@ -41,21 +53,22 @@ const NewsFooter = () => {
         {/* Main Grid */}
         <div className="grid md:grid-cols-3 gap-8 pb-8 border-b border-gray-300 py-5">
           {/* Left Column */}
-          <div className="md:col-span-1 text-center md:text-left ">
-            <div className="flex items-center justify-center md:justify-start space-x-2 mb-1">
+          <div className="md:col-span-1 text-center md:text-left">
+            <div className="flex items-center justify-center md:justify-start space-x-2 mb-4">
               <Logo />
             </div>
 
-            <div className="grid grid-cols-3 gap-4 text-sm mt-4">
+            <div className="grid grid-cols-2 gap-6 text-sm mt-4">
               {footerLinks.map((column, colIndex) => (
                 <ul key={colIndex} className="space-y-2">
-                  {column.map((link, linkIndex) => (
+                  <h3 className="font-semibold mb-2">{column.title}</h3>
+                  {column.links.map((link, linkIndex) => (
                     <li key={linkIndex}>
                       <a
-                        href={`#${link}`}
-                        className="hover:text-red-400 transition duration-150 whitespace-nowrap"
+                        href={link.href}
+                        className="hover:text-red-400 transition duration-150"
                       >
-                        {link}
+                        {link.name}
                       </a>
                     </li>
                   ))}
@@ -73,19 +86,16 @@ const NewsFooter = () => {
               <ul className="space-y-3 text-sm mb-6">
                 <li className="flex items-center justify-center md:justify-end">
                   <MapPin size={16} className="mr-2 flex-shrink-0" />
-                 বঙ্গবন্ধু রোড, আশুলিয়া বাস স্ট্যান্ড, আশুলিয়া, সাভার, ঢাকা।
-
+                  বঙ্গবন্ধু রোড, আশুলিয়া বাস স্ট্যান্ড, আশুলিয়া, সাভার, ঢাকা।
                 </li>
                 <li className="flex items-center justify-center md:justify-end">
                   <Phone size={16} className="mr-2 flex-shrink-0" />
-
                   <a href="tel:01929450836" className="hover:underline">
                     01929450836
                   </a>
                 </li>
                 <li className="flex items-center justify-center md:justify-end">
                   <Mail size={16} className="mr-2 flex-shrink-0" />
-
                   <a
                     href="mailto:tsbvisionnews.net@gmail.com"
                     className="hover:underline"
