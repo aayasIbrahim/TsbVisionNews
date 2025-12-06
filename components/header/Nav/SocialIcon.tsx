@@ -1,5 +1,11 @@
 import Link from "next/link";
-import { Facebook, Youtube, Instagram, MessageCircle } from "lucide-react";
+import { 
+  FaFacebookF, 
+  FaYoutube, 
+  FaInstagram, 
+
+} from "react-icons/fa";
+import { IoLogoWhatsapp } from "react-icons/io";
 
 const SocialIcons: React.FC = () => (
   <div className="flex items-center justify-center space-x-3 text-gray-500">
@@ -9,7 +15,7 @@ const SocialIcons: React.FC = () => (
       className="hover:text-blue-600 transition"
       target="_blank"
     >
-      <Facebook size={18} />
+     <FaFacebookF  size={25} className="text-blue-600" />
     </Link>
 
     <Link
@@ -18,7 +24,7 @@ const SocialIcons: React.FC = () => (
       className="hover:text-red-600 transition"
       target="_blank"
     >
-      <Youtube size={18} />
+     <FaYoutube  size={25} className="text-red-600" />
     </Link>
 
     <Link
@@ -27,7 +33,7 @@ const SocialIcons: React.FC = () => (
       className="hover:text-pink-500 transition"
       target="_blank"
     >
-      <Instagram size={18} />
+      <FaInstagram  size={25} className="text-pink-600" />
     </Link>
 
     <Link
@@ -36,7 +42,8 @@ const SocialIcons: React.FC = () => (
       className="hover:text-green-600 transition"
       target="_blank"
     >
-      <MessageCircle size={18} />
+     
+       <IoLogoWhatsapp size={28} className="text-green-500" />
     </Link>
   </div>
 );
