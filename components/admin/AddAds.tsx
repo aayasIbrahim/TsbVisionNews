@@ -131,7 +131,8 @@ export default function AddAds({ selectedAd, setSelectedAd }: AddAdsProps) {
             <Image
               src={form.image}
               alt="Ad"
-              fill
+             width={728}
+             height={96}
               className="object-cover rounded"
             />
           )}

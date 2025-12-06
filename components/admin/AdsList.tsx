@@ -1,9 +1,12 @@
 "use client";
 import React from "react";
-import { useGetAdsQuery, useDeleteAdMutation } from "@/app/redux/features/ads/adsApi";
+import {
+  useGetAdsQuery,
+  useDeleteAdMutation,
+} from "@/app/redux/features/ads/adsApi";
 import { Ad } from "@/types/ads";
 interface AdsListProps {
-  setSelectedAd: (ad:Ad) => void;
+  setSelectedAd: (ad: Ad) => void;
 }
 export default function AdsList({ setSelectedAd }: AdsListProps) {
   const { data: ads, isLoading } = useGetAdsQuery();
@@ -30,6 +33,7 @@ export default function AdsList({ setSelectedAd }: AdsListProps) {
           {/* Details */}
           <div className="flex-1">
             <h3 className="font-bold text-lg">{ad.title}</h3>
+            <p className="text-blue-600 underline break-all">{ad.link}</p>
             <p className="text-gray-500">{ad.position}</p>
             <p className="text-gray-400 text-sm">
               Active: {new Date(ad.startDate).toLocaleDateString()} -{" "}
@@ -41,7 +45,7 @@ export default function AdsList({ setSelectedAd }: AdsListProps) {
           <div className="flex space-x-2">
             {/* Edit Button */}
             <button
-               onClick={() => setSelectedAd(ad)}
+              onClick={() => setSelectedAd(ad)}
               className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
             >
               Edit
