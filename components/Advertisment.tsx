@@ -7,7 +7,8 @@ import Image from "next/image";
 import DynamicTitleFavicon from "./DynamicTitleFavicon";
 
 const Advertisement: React.FC = () => {
-  const { data: ads, isLoading, isError } = useGetAdsQuery();
+  const { data, isLoading, } = useGetAdsQuery();
+const adsArray = data?.ads || [];
 
   if (isLoading) {
     return (
@@ -21,42 +22,41 @@ const Advertisement: React.FC = () => {
       </div>
     );
   }
+  if (adsArray.length === 0) return null;
 
-  if (isError || !ads) {
-    return (
-      <div className="max-w-6xl mx-auto px-4 py-10 text-center text-red-600">
-        <h1 className="text-3xl font-bold mb-4">বিজ্ঞাপন</h1>
-        <p>দুঃখিত! বিজ্ঞাপন লোড করা যায়নি।</p>
-      </div>
-    );
-  }
+
 
   return (
     <>
       <DynamicTitleFavicon title="Advertisement" faviconUrl="/favicon.ico" />
+
       <section className="max-w-6xl mx-auto px-4 py-10">
         <h1 className="text-3xl font-bold mb-8 text-center">বিজ্ঞাপন</h1>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {ads.map((ad) => (
+          {adsArray?.map((ad) => (
             <a
               key={ad._id}
-              href={ad.link}
+              href={ad.link || "#"}
               target="_blank"
               rel="noopener noreferrer"
-              className="border rounded-lg overflow-hidden shadow hover:shadow-lg transition-shadow duration-300"
+              className="border rounded-lg overflow-hidden shadow hover:shadow-lg transition-shadow duration-300 group"
             >
-              <div className="relative h-48 w-full">
+              <div className="relative w-full h-48">
                 <Image
                   src={ad.image}
                   alt={ad.title}
-                width={300}
-                height={200}
-                  className="object-cover"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-300"
                 />
               </div>
               <div className="p-4">
                 <h2 className="text-lg font-semibold mb-2">{ad.title}</h2>
+                {ad.link && (
+                  <p className="text-blue-600 underline break-all">
+                    {ad.link}
+                  </p>
+                )}
               </div>
             </a>
           ))}
@@ -70,9 +70,11 @@ const Advertisement: React.FC = () => {
             পারেন। আমাদের সাথে যোগাযোগ করুন:
           </p>
           <p className="text-blue-600 underline cursor-pointer">
-            ইমেইল: tsbvisionnews.net@gmail.com
+            ইমেইল: <a href="mailto:tsbvisionnews.net@gmail.com">tsbvisionnews.net@gmail.com</a>
           </p>
-          <p className="text-blue-600 underline cursor-pointer">ফোন: 01929450836</p>
+          <p className="text-blue-600 underline cursor-pointer">
+            ফোন: <a href="tel:01929450836">01929450836</a>
+          </p>
         </section>
       </section>
     </>

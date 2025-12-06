@@ -6,7 +6,8 @@ import { useGetAdsQuery } from "@/app/redux/features/ads/adsApi";
 import { Ad } from "@/types/ads";
 
 const AdvertisementBanner: React.FC = () => {
-  const { data: ads, isLoading, isError } = useGetAdsQuery();
+ const { data,isLoading,isError } = useGetAdsQuery();
+ const adsArray = data?.ads || [];
   const [visible, setVisible] = useState(true);
   const [closing, setClosing] = useState(false);
 
@@ -15,11 +16,11 @@ const AdvertisementBanner: React.FC = () => {
     setTimeout(() => setVisible(false), 300);
   };
 
-  if (!visible || isLoading || isError || !ads || ads.length === 0) return null;
+if (!visible || isLoading || isError || adsArray.length === 0) return null;
 
   // ধরুন প্রথম ad দেখাবেন
-  const ad: Ad = ads[0];
-  console.log(ad);
+ const ad: Ad = adsArray[0];
+
 
   return (
     <div

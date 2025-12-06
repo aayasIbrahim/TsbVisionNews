@@ -6,10 +6,20 @@ import Ads from "@/models/Ads";
 export async function GET() {
   try {
     await connectToDB();
+
+    // Fetch ads
     const ads = await Ads.find({}).sort({ createdAt: -1 });
-    return NextResponse.json(ads);
-  } catch (error) {
-    return NextResponse.json({ message: "Failed to fetch ads", error }, { status: 500 });
+
+    // Get total ads count
+    const totalAdsCount = await Ads.countDocuments({});
+
+    // Return both as a single JSON object
+    return NextResponse.json({ ads, totalAdsCount });
+  } catch  {
+    return NextResponse.json(
+      { message: "Failed to fetch ads" },
+      { status: 500 }
+    );
   }
 }
 

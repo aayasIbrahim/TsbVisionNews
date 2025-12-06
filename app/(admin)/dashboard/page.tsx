@@ -4,6 +4,7 @@ import MetricCard from "@/components/admin/MetricCard";
 import { FiFileText, FiFolder, FiMonitor, FiUsers } from "react-icons/fi";
 import { useGetNewsQuery } from "@/app/redux/features/news/newsApi";
 import { useGetUsersQuery } from "@/app/redux/features/user/userApi";
+import { useGetAdsQuery } from "@/app/redux/features/ads/adsApi";
 
 const Dashboard = () => {
   const {
@@ -13,6 +14,8 @@ const Dashboard = () => {
   } = useGetNewsQuery("all");
 
   const { data: user } = useGetUsersQuery();
+  const{data:ads}=useGetAdsQuery();
+  const adsCount =ads?.totalAdsCount || 0
 
   const userCount = user?.totalUser || 0;
 
@@ -57,7 +60,7 @@ const Dashboard = () => {
             icon={FiFolder}
             color="teal-500"
           />
-          <MetricCard title="ADS" value={0} icon={FiMonitor} color="teal-500" />
+          <MetricCard title="ADS" value={adsCount} icon={FiMonitor} color="teal-500" />
           <MetricCard
             title="Total User"
             value={userCount.toLocaleString()}

@@ -1,6 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { Ad } from "@/types/ads";
-
+interface AdsResponse {
+  ads: Ad[];
+  totalAdsCount: number;
+}
 
 
 export const adsApi = createApi({
@@ -9,12 +12,12 @@ export const adsApi = createApi({
   tagTypes: ["Ads"],
   endpoints: (builder) => ({
     // GET all ads
-    getAds: builder.query<Ad[], void>({
+    getAds: builder.query<AdsResponse, void>({
       query: () => "",
       providesTags: ["Ads"],
     }),
     // ADD new ad
-    addAd: builder.mutation<Ad, Partial<Ad>>({
+    addAd: builder.mutation< AdsResponse, Partial<Ad>>({
       query: (ad) => ({
         url: "",
         method: "POST",
