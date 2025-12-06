@@ -2,9 +2,8 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { useGetAdsQuery, } from "@/app/redux/features/ads/adsApi";
+import { useGetAdsQuery } from "@/app/redux/features/ads/adsApi";
 import { Ad } from "@/types/ads";
-
 
 const AdvertisementBanner: React.FC = () => {
   const { data: ads, isLoading, isError } = useGetAdsQuery();
@@ -20,6 +19,7 @@ const AdvertisementBanner: React.FC = () => {
 
   // ধরুন প্রথম ad দেখাবেন
   const ad: Ad = ads[0];
+  console.log(ad);
 
   return (
     <div
@@ -29,11 +29,10 @@ const AdvertisementBanner: React.FC = () => {
       style={{ fontFamily: `"Noto Sans Bengali", "Inter", sans-serif` }}
     >
       <a
-        href={ad.link}
+        href={ad.link.startsWith("http") ? ad.link : `https://${ad.link}`}
         target="_blank"
         rel="noopener noreferrer"
-        className="block max-w-full overflow-hidden"
-        aria-label={`Advertisement: ${ad.title}`}
+        className="hover:underline"
       >
         <Image
           src={ad.image}
