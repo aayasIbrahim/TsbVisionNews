@@ -18,16 +18,7 @@ function TopBar() {
 
         {/* Search */}
         <div className="mt-2 sm:mt-[20px] w-full sm:w-[380px] sm:ms-auto">
-          {/* <div className="flex w-full">
-            <input
-              type="text"
-              placeholder="যা খুঁজতে চান"
-              className="flex-1 border border-gray-300 rounded-l-md px-4 py-2 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-transparent"
-            />
-            <button className="bg-gray-500 text-white px-4 py-2 rounded-r-md hover:bg-gray-600 transition flex items-center justify-center">
-              <CiSearch size={20} />
-            </button>
-          </div> */}
+         
         </div>
       </div>
     </div>

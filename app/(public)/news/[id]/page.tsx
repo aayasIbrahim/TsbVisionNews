@@ -10,7 +10,6 @@ const NewsDetailPage: React.FC = () => {
   const params = useParams();
   const rawId = params.id;
   const newsId = Array.isArray(rawId) ? rawId[0] : rawId;
-
   const { data: news, isLoading, error } = useGetNewsByIdQuery(newsId ?? "");
 
   if (!newsId)

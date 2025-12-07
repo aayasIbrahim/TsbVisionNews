@@ -64,7 +64,7 @@ const AdminNavbar: React.FC = () => {
         <div className="flex items-center">
           <Link href="/">
             <Image
-              src="/logo/TSB Logo[1].png"
+              src="/logo/tsb.jpg"
               alt="Logo"
               width={100}
               height={95}
