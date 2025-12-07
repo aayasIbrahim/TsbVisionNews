@@ -13,12 +13,8 @@ import { useGetNewsQuery } from "@/app/redux/features/news/newsApi";
 
 
 const PoliticsSection: React.FC = () => {
-  // RTK Query → Fetch news based on category "রাজনীতি"
   const { data, isLoading, error } = useGetNewsQuery("রাজনীতি");
-
   const news = data?.data || [];
-
-
   if (error) return <p className="text-center py-10 text-red-500">Failed to load politics news.</p>;
   if (!news.length) return <p className="text-center py-10">No Politics News Found.</p>;
 
@@ -81,13 +77,11 @@ const PoliticsSection: React.FC = () => {
         </div>
 
         {/* SIDEBAR AD */}
-        <AdCard
-          ad={{
-            title: "ঈদ অফার",
-            details: "বিশেষ ছাড়!",
-            imageUrl: "/ads/image.png",
-          }}
+       <div className="hidden md:block">
+         <AdCard
+        
         />
+       </div>
       </div>
 
       <AdvertisementBanner />

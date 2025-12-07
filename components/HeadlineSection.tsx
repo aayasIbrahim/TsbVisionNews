@@ -25,8 +25,8 @@ export default function HeaderSection() {
   const leftColumnNews = news.slice(4, 7);       // Latest 5
   const topHeadline = news.slice(0, 3);          // Main top 3
   const rightSidebarList =
-    news.filter((n) => n.isFeatured).slice(7, 9).length > 0
-      ? news.filter((n) => n.isFeatured).slice(7, 9)
+    news.filter((n) => n.isFeatured).slice(0, 11).length > 0
+      ? news.filter((n) => n.isFeatured).slice(0,11)
       : news.slice(3, 8);
 
   

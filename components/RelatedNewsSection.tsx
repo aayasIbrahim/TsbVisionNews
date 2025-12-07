@@ -42,7 +42,7 @@ const RelatedNewsSection: React.FC<RelatedNewsSectionProps> = ({
                 "
               >
                 {/* Image */}
-                <div className="flex-shrink-0 w-full sm:w-32 h-24 sm:h-20 relative rounded-lg overflow-hidden">
+                <div className="flex-shrink-0 w-full sm:w-32 h-24 sm:h-25 relative rounded-lg overflow-hidden">
                   <Image
                     src={news.imageSrc || "/placeholder.png"}
                     alt={news.title}

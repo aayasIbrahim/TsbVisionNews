@@ -40,7 +40,7 @@ if (!visible || isLoading || isError || adsArray.length === 0) return null;
           alt={ad.title}
           width={970}
           height={130}
-          className="w-full max-w-[970px] h-auto sm:h-[80px] md:h-[100px] lg:h-[120px] lg:w-[900px] object-cover mb-5 rounded-md shadow-sm"
+          className="w-full max-w-[970px] h-[200px] sm:h-[80px] md:h-[100px] lg:h-[120px] lg:w-[900px] object-cover mb-5 rounded-md shadow-sm"
         />
       </a>
 

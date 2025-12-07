@@ -21,7 +21,7 @@ const NewsDetailPage: React.FC = () => {
 
   return (
     <>
-      <div className="container mx-auto px-4 py-10 mt-[80px] space-y-6">
+      <div className="container mx-auto px-4 py-10  space-y-6">
         {news.category && (
           <p className="text-gray-500 mt-4">
             বিভাগ: <span className="font-semibold">{news.category}</span>
@@ -33,7 +33,7 @@ const NewsDetailPage: React.FC = () => {
         </h1>
 
         {news.imageSrc && (
-          <div className="relative w-full h-[400px] rounded-lg overflow-hidden">
+          <div className="relative w-full text-center h-[400px] lg:h-[700px] rounded-lg overflow-hidden">
             <Image
               src={news.imageSrc}
               alt={news.title}
