@@ -17,6 +17,7 @@ const allCategories = [
   { name: "বিশ্ব", value: "বিশ্ব" },
   { name: "বাণিজ্য", value: "বাণিজ্য" },
   { name: "খেলা", value: "খেলা" },
+  { name: "বিনোদন", value: "বিনোদন" },
 ];
 
 // কম্পোনেন্টটি এখন NewsListProps গ্রহণ করবে
@@ -99,7 +100,7 @@ const NewsList = ({ onEditClick }: NewsListProps) => {
             onClick={() => setSelectedCategory(cat.value)}
             className={`px-4 py-2 rounded-full text-sm font-medium border transition ${
               selectedCategory === cat.value
-                ? "bg-blue-600 text-white border-blue-700"
+                ? "bg-gray-600 text-white border-gray-700"
                 : "bg-gray-200 text-gray-700 hover:bg-gray-300"
             }`}
           >

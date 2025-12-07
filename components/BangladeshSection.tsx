@@ -8,57 +8,49 @@ import SectionHeader from "./ui/SectionHeader";
 import { useGetNewsQuery } from "@/app/redux/features/news/newsApi";
 import FullScreenLoading from "./ui/FullScreenLoading";
 
-
-
 const BangladeshSection: React.FC = () => {
   const { data, isLoading, error } = useGetNewsQuery("বাংলাদেশ");
-
   const news = data?.data || [];
 
   if (error)
     return (
       <p className="text-center py-10 text-red-600">Failed to load news.</p>
     );
-  if (!news.length) return <p className="text-center py-10">No news found.</p>;
+  if (!news.length)
+    return <p className="text-center py-10">No news found.</p>;
 
   // Structure
   const heroArticle = news[0];
   const mainContentArticles = news.slice(1, 4);
 
   // Convert Most Read
-  const mostRead = news.slice(4, 6).map((item) => ({
+  const mostRead = news.slice(4, 9).map((item) => ({
     id: item._id,
     title: item.title,
     authorImage: item.imageSrc || "/placeholder.png",
   }));
 
   return (
-    <>
-    
-      
     <section className="bg-white min-h-screen">
       <div className="p-4 sm:p-8 container mx-auto">
         <SectionHeader title="বাংলাদেশ" />
         {isLoading && <FullScreenLoading />}
-        <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-12">
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           {/* LEFT SIDE */}
-          <div className="md:col-span-2 lg:col-span-9 flex flex-col gap-6">
+          <div className="lg:col-span-9 flex flex-col gap-6">
             {/* HERO SECTION */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="col-span-1 md:col-span-2">
-                <HeroCard
-                  article={{
-                    id: heroArticle._id,
-                    title: heroArticle.title,
-                    image: heroArticle.imageSrc || "/placeholder.png",
-                    summary: heroArticle.summary,
-                  }}
-                />
-              </div>
-            </div>
+            <HeroCard
+              article={{
+                id: heroArticle._id,
+                title: heroArticle.title,
+                image: heroArticle.imageSrc || "/placeholder.png",
+                summary: heroArticle.summary,
+              }}
+            />
 
             {/* STANDARD ARTICLES */}
-            <div className="grid grid-cols- sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {mainContentArticles.map((article) => (
                 <StandardArticleCard
                   key={article._id}
@@ -74,17 +66,23 @@ const BangladeshSection: React.FC = () => {
           </div>
 
           {/* RIGHT SIDEBAR → MOST READ */}
-          <div className="md:col-span-1 lg:col-span-3 flex flex-col gap-6">
+          <aside className="lg:col-span-3 flex flex-col gap-6">
             <div className="bg-white border border-gray-200 shadow-sm rounded-lg overflow-hidden">
-              {mostRead.map((item) => (
-                <MostReadItemComponent key={item.id} item={item} />
-              ))}
+              <h2 className="text-lg font-semibold p-4 border-b border-gray-200 text-center">
+                আরও
+              </h2>
+              <ul className="divide-y divide-gray-200">
+                {mostRead.map((item) => (
+                  <li key={item.id} className="p-4 hover:bg-gray-50 transition">
+                    <MostReadItemComponent item={item} />
+                  </li>
+                ))}
+              </ul>
             </div>
-          </div>
+          </aside>
         </div>
       </div>
     </section>
-    </>
   );
 };
 
