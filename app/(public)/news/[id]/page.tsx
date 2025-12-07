@@ -33,7 +33,7 @@ const NewsDetailPage: React.FC = () => {
         </h1>
 
         {news.imageSrc && (
-          <div className="relative w-full text-center h-[400px] lg:h-[700px] rounded-lg overflow-hidden">
+          <div className="relative w-full  h-[400px] lg:h-[800px] rounded-lg overflow-hidden">
             <Image
               src={news.imageSrc}
               alt={news.title}
@@ -45,7 +45,7 @@ const NewsDetailPage: React.FC = () => {
         )}
 
         <div
-          className="prose max-w-none"
+          className="prose max-w-none text-[22px]"
           dangerouslySetInnerHTML={{ __html: news.content }}
         />
 

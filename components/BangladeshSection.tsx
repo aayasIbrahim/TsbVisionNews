@@ -26,7 +26,7 @@ const BangladeshSection: React.FC = () => {
   const mainContentArticles = news.slice(1, 4);
 
   // Convert Most Read
-  const mostRead = news.slice(0, 6).map((item) => ({
+  const mostRead = news.slice(4, 6).map((item) => ({
     id: item._id,
     title: item.title,
     authorImage: item.imageSrc || "/placeholder.png",
@@ -40,7 +40,7 @@ const BangladeshSection: React.FC = () => {
       <div className="p-4 sm:p-8 container mx-auto">
         <SectionHeader title="বাংলাদেশ" />
         {isLoading && <FullScreenLoading />}
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-12">
+        <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-12">
           {/* LEFT SIDE */}
           <div className="md:col-span-2 lg:col-span-9 flex flex-col gap-6">
             {/* HERO SECTION */}
@@ -58,7 +58,7 @@ const BangladeshSection: React.FC = () => {
             </div>
 
             {/* STANDARD ARTICLES */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols- sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {mainContentArticles.map((article) => (
                 <StandardArticleCard
                   key={article._id}
