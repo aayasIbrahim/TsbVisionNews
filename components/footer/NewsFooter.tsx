@@ -81,7 +81,7 @@ const NewsFooter = () => {
           <div className="md:col-span-2 flex justify-center md:justify-end mt-8 md:mt-0">
             <div className="text-center md:text-right w-full md:w-auto">
               <h2 className="text-lg font-bold mb-4">
-              প্রধান সম্পাদক ও প্রকাশক : ইঞ্জিনিয়ার মো. বায়েজীদ
+              প্রধান সম্পাদক ও প্রকাশক :  ইঞ্জিনিয়ার মো. বায়েজীদ
 
               </h2>
               <ul className="space-y-3 text-sm mb-6">
