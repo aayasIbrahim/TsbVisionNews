@@ -97,7 +97,7 @@ export const uploadToCloudinary = async (file: File) => {
   formData.append("file", file); // Cloudinary expects 'file' field
   formData.append(
     "upload_preset",
-    process.env.CLOUDINARY_CLOUD_NAME!
+    process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET!
   );
 
   const res = await fetch(
