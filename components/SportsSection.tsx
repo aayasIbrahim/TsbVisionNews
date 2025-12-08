@@ -13,7 +13,7 @@ const SportsSection: React.FC = () => {
   const { data, isLoading, error } = useGetNewsQuery("খেলা");
   const news=data?.data||[];
 
-  if (!news.length) return <p className="text-center py-10">No sports news found.</p>;
+  if (!news.length) return null;
  if (error) return <p className="text-center py-10 text-red-400">Failed to load news.</p>;
   // Distribute Layout Sections
   const leftTwo = news.slice(0, 2);         // Left 2 articles

@@ -18,7 +18,7 @@ const CommerceSection: React.FC = () => {
     return (
       <p className="text-center py-10 text-red-600">Failed to load news.</p>
     );
-  if (!news.length) return <p className="text-center py-10">No news found.</p>;
+  if (!news.length) return null;
 
   const mainArticle = news[0];
   const rightArticles = news.slice(1);
