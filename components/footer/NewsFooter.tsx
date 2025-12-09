@@ -19,6 +19,7 @@ const footerLinks = [
       { name: "বাণিজ্য", href: "/business" },
       { name: "জাতীয়", href: "/national" },
       { name: "রাজনীতি", href: "/politics" },
+     { name: "মতামত", href: "/opinion" }
     ],
   },
 ];
