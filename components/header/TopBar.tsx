@@ -1,6 +1,7 @@
 import { getAllDates } from "@/utils/utils";
 // import { CiSearch } from "react-icons/ci";
 import Logo from "../ui/Logo";
+import Clock from "../ui/Clock";
 function TopBar() {
   return (
     <div className="container mx-auto flex flex-col sm:flex-row justify-between items-start sm:items-center px-5 py-4 gap-4">
@@ -18,7 +19,7 @@ function TopBar() {
 
         {/* Search */}
         <div className="mt-2 sm:mt-[20px] w-full sm:w-[380px] sm:ms-auto">
-         
+         <Clock/>
         </div>
       </div>
     </div>
