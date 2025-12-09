@@ -32,6 +32,7 @@ const categories = [
   { name: "বাণিজ্য" },
   { name: "খেলা" },
   { name: "বিনোদন" },
+  { name: "মতামত" },
 ];
 
 export default function NewsForm({ initialData, onSuccess }: NewsFormProps) {
