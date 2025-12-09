@@ -19,7 +19,7 @@ import { useGetNewsQuery } from "@/app/redux/features/news/newsApi";
 
 export default function HeaderSection() {
  
-  const { data, isLoading } = useGetNewsQuery("all"); 
+  const { data, isLoading } = useGetNewsQuery({ category :"all", limit :10 }); 
    const news: INews[] = data?.data || [];
 
   const leftColumnNews = news.slice(4, 7);       // Latest 5

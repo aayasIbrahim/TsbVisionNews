@@ -15,7 +15,7 @@ const RelatedNewsSection: React.FC<RelatedNewsSectionProps> = ({
   currentNewsId,
 }) => {
   // Call RTK Query
-  const { data, isLoading, isError } = useGetNewsQuery(category);
+  const { data, isLoading, isError } = useGetNewsQuery({category, limit: 15});
 
   // Filter out current news
   const relatedNews: INews[] =

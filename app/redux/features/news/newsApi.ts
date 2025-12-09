@@ -14,9 +14,12 @@ export const newsApi = createApi({
   tagTypes: ["News"],
   endpoints: (builder) => ({
     // Get all news by category
-    getNews: builder.query<NewsApiResponse, string | void>({
-      query: (category = "all") => ({
-        url: `?category=${encodeURIComponent(category || "all")}`,
+    getNews: builder.query<
+      NewsApiResponse,
+      { category?: string; limit?: number }
+    >({
+      query: ({ category = "all", limit = 10 } = {}) => ({
+        url: `?category=${encodeURIComponent(category)}&limit=${limit}`,
         method: "GET",
       }),
       providesTags: (result) =>
@@ -40,7 +43,7 @@ export const newsApi = createApi({
       // --- REMOVED: transformResponse is removed to expect INews directly
       providesTags: (result, error, id) => [{ type: "News", id }],
     }),
-    
+
     // Add news
     addNews: builder.mutation<INews, INewsPayload>({
       query: (body) => ({

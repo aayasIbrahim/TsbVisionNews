@@ -11,7 +11,10 @@ import FullScreenLoading from "./ui/FullScreenLoading";
 import { INews } from "@/types/news";
 
 const WorldSection: React.FC = () => {
-  const { data, isLoading, error } = useGetNewsQuery("বিশ্ব")
+  const { data, isLoading, error } = useGetNewsQuery({
+    category: "বিশ্ব",
+    limit: 10,
+  })
 
   
   if (error) return <p className="text-center p-10 text-red-600">Error loading national news</p>;

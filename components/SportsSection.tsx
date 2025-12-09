@@ -10,7 +10,10 @@ import { useGetNewsQuery } from "@/app/redux/features/news/newsApi";
 
 
 const SportsSection: React.FC = () => {
-  const { data, isLoading, error } = useGetNewsQuery("খেলা");
+  const { data, isLoading, error } = useGetNewsQuery({
+    category: "খেলা",
+    limit: 10,
+  });
   const news=data?.data||[];
 
   if (!news.length) return null;

@@ -13,7 +13,10 @@ import { useGetNewsQuery } from "@/app/redux/features/news/newsApi";
 
 
 const PoliticsSection: React.FC = () => {
-  const { data, isLoading, error } = useGetNewsQuery("রাজনীতি");
+  const { data, isLoading, error } = useGetNewsQuery({
+    category: "রাজনীতি",
+    limit: 10,
+  });
   const news = data?.data || [];
   if (error) return <p className="text-center py-10 text-red-500">Failed to load politics news.</p>;
   if (!news.length) return <p className="text-center py-10">No Politics News Found.</p>;

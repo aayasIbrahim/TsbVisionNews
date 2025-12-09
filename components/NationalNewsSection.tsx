@@ -11,7 +11,10 @@ import FullScreenLoading from "./ui/FullScreenLoading";
 import { INews } from "@/types/news";
 
 const NationalNewsSection: React.FC = () => {
-  const { data, isLoading, error } = useGetNewsQuery("জাতীয়"); // category "জাতীয়"
+  const { data, isLoading, error } = useGetNewsQuery({
+    category: "জাতীয়",
+    limit: 10,
+  }); // category "জাতীয়"
 
   // Safety checks
 

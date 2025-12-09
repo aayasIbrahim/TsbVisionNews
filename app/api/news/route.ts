@@ -11,47 +11,69 @@ export async function GET(request: NextRequest) {
 
   try {
     const url = request.nextUrl;
-    const pathSegments = url.pathname.split("/").filter(Boolean); // e.g., ['api', 'news', '6925565ac2d5f339e5e127f5']
-    const id = pathSegments[2]; // index 2 = newsId
+    const pathSegments = url.pathname.split("/").filter(Boolean);
+    const id = pathSegments[2];
 
-    // If ID exists, fetch single news
+    // Fetch single news by ID
     if (id) {
       if (!id.match(/^[0-9a-fA-F]{24}$/)) {
-        return NextResponse.json({ success: false, message: "Invalid news ID" }, { status: 400 });
+        return NextResponse.json(
+          { success: false, message: "Invalid news ID" },
+          { status: 400 }
+        );
       }
+
       const newsItem = await News.findById(id);
       if (!newsItem) {
-        return NextResponse.json({ success: false, message: "News not found" }, { status: 404 });
+        return NextResponse.json(
+          { success: false, message: "News not found" },
+          { status: 404 }
+        );
       }
+
       return NextResponse.json({ success: true, data: newsItem });
     }
 
-    // Otherwise, fetch by category (existing logic)
+    // Fetch by category
     const category = url.searchParams.get("category") || "all";
     const query: { category?: string } = {};
-    if (category && category !== "all") query.category = decodeURIComponent(category);
 
-    const newsheadline = await News.find(query, "title").sort({ createdAt: -1 });
+    if (category !== "all") {
+      query.category = decodeURIComponent(category);
+    }
+
+    const newsheadline = await News.find(query, "title")
+      .sort({ createdAt: -1 })
+      .limit(10); // ⬅ প্রথম ১০টা headline
+
     const totalNewsCount = await News.countDocuments({});
     const filteredNewsCount = await News.countDocuments(query);
-    const news = await News.find(query).sort({ createdAt: -1 });
+
+    // ⬅ এখানে limit(10) যোগ করলাম
+    const news = await News.find(query)
+      .sort({ createdAt: -1 })
+      .limit(10); // ⬅ প্রথম ১০টা নিউজ রিটার্ন করবে
 
     return NextResponse.json({
       success: true,
       data: news,
       newsheadline,
       totalCount: totalNewsCount,
-      filteredCount: filteredNewsCount
+      filteredCount: filteredNewsCount,
     });
-
   } catch (error) {
     console.error("GET News Error:", error);
     return NextResponse.json(
-      { success: false, message: "Failed to fetch news", error: error instanceof Error ? error.message : null },
+      {
+        success: false,
+        message: "Failed to fetch news",
+        error: error instanceof Error ? error.message : null,
+      },
       { status: 500 }
     );
   }
 }
+
 
 // POST new news
 export async function POST(req: Request) {

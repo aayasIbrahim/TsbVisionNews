@@ -11,7 +11,10 @@ import { useGetNewsQuery } from "@/app/redux/features/news/newsApi";
 
 const EntertainmentSection: React.FC = () => {
   // RTK Query call
-  const { data, isLoading, error } = useGetNewsQuery("বিনোদন");
+  const { data, isLoading, error } = useGetNewsQuery({
+    category: "বিনোদন",
+    limit: 10,
+  });
 
   const news = data?.data || [];
 

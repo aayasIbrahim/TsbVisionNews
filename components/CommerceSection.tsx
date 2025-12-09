@@ -10,7 +10,10 @@ import DynamicTitleFavicon from "./DynamicTitleFavicon";
 
 const CommerceSection: React.FC = () => {
   // RTK Query call
-  const { data, isLoading, error } = useGetNewsQuery("বাণিজ্য");
+  const { data, isLoading, error } = useGetNewsQuery({
+    category: "বাণিজ্য",
+    limit: 10,
+  });
 
   const news = data?.data || [];
 

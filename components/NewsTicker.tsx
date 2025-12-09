@@ -6,7 +6,7 @@ import { useGetNewsQuery} from "@/app/redux/features/news/newsApi";
 
 
 const NewsTicker = () => {
-  const { data, isLoading, error } = useGetNewsQuery("all");
+  const { data, isLoading, error } = useGetNewsQuery({ category: "all", limit: 10 });
 
  const headlines = data?.newsheadline || [];
 

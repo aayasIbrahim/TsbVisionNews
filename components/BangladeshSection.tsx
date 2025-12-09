@@ -13,7 +13,10 @@ export interface MostReadItem {
   authorImage: string;
 }
 const BangladeshSection: React.FC = () => {
-  const { data, isLoading, error } = useGetNewsQuery("বাংলাদেশ");
+const { data, isLoading, error } = useGetNewsQuery({
+  category: "বাংলাদেশ",
+  limit: 10,
+});
   const news = data?.data || [];
 
   if (error)
