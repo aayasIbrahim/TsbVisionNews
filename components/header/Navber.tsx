@@ -77,7 +77,7 @@ const NavBar: React.FC = () => {
     ...(isAdmin
       ? [
           { name: "অ্যাডমিন প্যানেল", href: "/dashboard", isAdmin: true },
-          { name: "সংবাদ যুক্ত করুন", href: "/addnews", isAdmin: true },
+          // { name: "সংবাদ যুক্ত করুন", href: "/addnews", isAdmin: true },
         ]
       : []),
   ];
