@@ -71,6 +71,7 @@ const NavBar: React.FC = () => {
     { name: "বাণিজ্য", href: "/business" },
     { name: "খেলা", href: "/sports" },
     { name: "বিনোদন", href: "/entertainment" },
+    { name: "মতামত", href: "/opinion" },
 
     // Only show when admin = true
     ...(isAdmin
