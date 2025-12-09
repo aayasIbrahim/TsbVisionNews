@@ -7,7 +7,11 @@ import MostReadItemComponent from "@/components/bangladesh/MostReadItemComponent
 import SectionHeader from "./ui/SectionHeader";
 import { useGetNewsQuery } from "@/app/redux/features/news/newsApi";
 import FullScreenLoading from "./ui/FullScreenLoading";
-
+export interface MostReadItem {
+  id: string;
+  title: string;
+  authorImage: string;
+}
 const BangladeshSection: React.FC = () => {
   const { data, isLoading, error } = useGetNewsQuery("বাংলাদেশ");
   const news = data?.data || [];

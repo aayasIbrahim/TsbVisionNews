@@ -12,13 +12,13 @@ const MostReadItemComponent: React.FC<MostReadItemProps> = ({ item }) => {
   return (
     <Link href={`news/${item.id}`} >
       <div className="flex items-center gap-3 p-3 bg-white border-b border-gray-200 hover:bg-gray-50 transition duration-150 cursor-pointer last:border-b-0">
-        <div className="flex-shrink-0 w-16 h-16 rounded-md overflow-hidden">
+        <div className="flex-shrink-0  rounded-md overflow-hidden">
           <Image
             src={item.authorImage}
             alt="Author"
             className="object-cover"
-            height={300}
-            width={300}
+            height={80}
+            width={80}
             sizes="64px"
           />
         </div>
