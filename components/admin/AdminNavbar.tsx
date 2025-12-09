@@ -3,22 +3,19 @@ import React, { useState } from "react";
 import { signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
- 
+
 import {
   MdDashboard,
   MdArticle,
   MdCategory,
-  MdPeople,
   MdLogout,
   MdMenu,
   MdClose,
-  // MdHome,
   MdSettings,
   MdAdsClick,
   MdKeyboardArrowDown,
   MdVideoLibrary,
 } from "react-icons/md";
-
 
 interface NavLinkItem {
   id: number;
@@ -29,12 +26,10 @@ interface NavLinkItem {
 
 const NAV_LINKS: NavLinkItem[] = [
   { id: 1, label: "ড্যাশবোর্ড", icon: MdDashboard, href: "/dashboard" },
-  // { id: 5, label: "Public Site", icon: MdHome, href: "/" },
   { id: 2, label: "Add News", icon: MdArticle, href: "/addnews" },
   { id: 3, label: "News list", icon: MdCategory, href: "/newslist" },
   { id: 8, label: "Videos", icon: MdVideoLibrary, href: "/videos" },
   { id: 6, label: "ADS", icon: MdAdsClick, href: "/ads" },
-  { id: 7, label: "User", icon: MdPeople, href: "/users" },
   { id: 4, label: "Settings", icon: MdSettings, href: "/settings" },
 ];
 

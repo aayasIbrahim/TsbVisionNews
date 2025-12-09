@@ -1,10 +1,12 @@
 "use client";
-import ChangePasswordForm from "@/components/admin/ChangePasswordForm";
+import LogoPage from "./logo/page";
+
 
 export default function Page() {
   return (
     <>
-      <ChangePasswordForm />
+     
+      <LogoPage/>
     </>
   );
 }

@@ -31,7 +31,7 @@ const { data, isLoading, error } = useGetNewsQuery({
   const mainContentArticles = news.slice(1, 4);
 
   // Convert Most Read
-  const mostRead = news.slice(4, 9).map((item) => ({
+  const mostRead = news.slice(5, 11).map((item) => ({
     id: item._id,
     title: item.title,
     authorImage: item.imageSrc || "/placeholder.png",

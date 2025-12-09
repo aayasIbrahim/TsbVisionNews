@@ -11,14 +11,14 @@ interface MostReadItemProps {
 const MostReadItemComponent: React.FC<MostReadItemProps> = ({ item }) => {
   return (
     <Link href={`news/${item.id}`} >
-      <div className="flex items-center gap-3 p-3 bg-white border-b border-gray-200 hover:bg-gray-50 transition duration-150 cursor-pointer last:border-b-0">
+      <div className="flex items-center gap-6 p-3 bg-white border-b border-gray-200 hover:bg-gray-50 transition duration-150 cursor-pointer last:border-b-0">
         <div className="flex-shrink-0  rounded-md overflow-hidden">
           <Image
             src={item.authorImage}
             alt="Author"
             className="object-cover"
-            height={80}
-            width={80}
+            height={100}
+            width={100}
             sizes="64px"
           />
         </div>

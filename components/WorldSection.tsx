@@ -14,106 +14,70 @@ const WorldSection: React.FC = () => {
   const { data, isLoading, error } = useGetNewsQuery({
     category: "বিশ্ব",
     limit: 10,
-  })
+  });
 
-  
-  if (error) return <p className="text-center p-10 text-red-600">Error loading national news</p>;
-  if (!data || !data.data.length) return <p className="text-center p-10">No national news found.</p>;
- const news: INews[] = data.data;
-  // ------- Article Structure -------
+  if (isLoading) return <FullScreenLoading />;
+  if (error) return <p className="text-center p-10 text-red-600">Error loading world news</p>;
+  if (!data?.data?.length) return <p className="text-center p-10">No world news found.</p>;
+
+  const news: INews[] = data.data;
+
+  // Safe destructure
   const [
-    largeLeft,       // Big Left Card
-    mediumTop1,      // Medium Card Top
-    smallRightTop,   // Small Right 1
-    smallRightBottom, // Small Right 2
-    ...bottomCards    // BasicCards bottom list
+    largeLeft,
+    mediumTop1,
+    smallRightTop,
+    smallRightBottom,
+    ...bottomCards
   ] = news;
+
+  // utility mapper
+  const mapArticle = (item: INews) => ({
+    id: item._id,
+    title: item.title,
+    summary: item.summary,
+    image: item.imageSrc || "/placeholder.png",
+  });
 
   return (
     <section className="bg-white min-h-screen">
       <div className="container mx-auto p-4 sm:p-8">
+
         <SectionHeader title="বিশ্ব" />
 
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-6 lg:grid-rows-2 lg:h-[650px]">
-            {isLoading && <FullScreenLoading/>}
-          {/* TOP LEFT LARGE CARD */}
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-6 lg:grid-rows-2 lg:h-[650px]">
+
+          {/* LEFT LARGE CARD */}
           <div className="lg:col-span-2 lg:row-span-2">
             {largeLeft && (
-              <LargeLeftCard
-                article={{
-                  id: largeLeft._id,
-                  title: largeLeft.title,
-                  summary: largeLeft.summary,
-                  image: largeLeft.imageSrc || "/placeholder.png",
-                }}
-              />
+              <LargeLeftCard article={mapArticle(largeLeft)} />
             )}
           </div>
 
-          {/* TOP MIDDLE MEDIUM CARD */}
+          {/* MIDDLE MEDIUM CARD */}
           <div className="lg:col-span-2 lg:row-span-1">
             {mediumTop1 && (
-              <MediumCard
-                article={{
-                  id: mediumTop1._id,
-                  title: mediumTop1.title,
-                  summary: mediumTop1.summary,
-                  image: mediumTop1.imageSrc || "/placeholder.png",
-                }}
-              />
+              <MediumCard article={mapArticle(mediumTop1)} />
             )}
           </div>
 
-          {/* TOP RIGHT TWO SMALL CARDS */}
+          {/* RIGHT SMALL CARDS */}
           <div className="lg:col-span-2 lg:row-span-1 flex flex-col gap-4">
             {smallRightTop && (
-              <SideSmallCard
-                article={{
-                  id: smallRightTop._id,
-                  title: smallRightTop.title,
-                  image: smallRightTop.imageSrc || "/placeholder.png",
-                }}
-              />
+              <SideSmallCard article={mapArticle(smallRightTop)} />
             )}
-
             {smallRightBottom && (
-              <SideSmallCard
-                article={{
-                  id: smallRightBottom._id,
-                  title: smallRightBottom.title,
-                  image: smallRightBottom.imageSrc || "/placeholder.png",
-                }}
-              />
+              <SideSmallCard article={mapArticle(smallRightBottom)} />
             )}
           </div>
 
-          {/* BOTTOM BASIC CARDS */}
-          {bottomCards.slice(0, 3).map((article) => (
-            <div key={article._id} className="lg:col-span-2 mt-5">
-              <BasicCard
-                article={{
-                  id: article._id,
-                  title: article.title,
-                  summary: article.summary,
-                  image: article.imageSrc || "/placeholder.png",
-                }}
-              />
+          {/* BOTTOM LIST CARDS */}
+          {bottomCards.slice(0, 4).map((item) => (
+            <div key={item._id} className="lg:col-span-2 mt-4">
+              <BasicCard article={mapArticle(item)} />
             </div>
           ))}
 
-          {/* LAST CARD */}
-          {bottomCards[3] && (
-            <div className="lg:col-span-2">
-              <BasicCard
-                article={{
-                  id: bottomCards[3]._id,
-                  title: bottomCards[3].title,
-                  summary: bottomCards[3].summary,
-                  image: bottomCards[3].imageSrc || "/placeholder.png",
-                }}
-              />
-            </div>
-          )}
         </div>
       </div>
     </section>

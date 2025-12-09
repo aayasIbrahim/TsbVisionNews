@@ -12,8 +12,10 @@ export default function SettingsLayout({ children }: SettingsLayoutProps) {
   const pathname = usePathname();
 
   const tabs = [
-    { id: "password", label: "Change Password", href: "/settings/password" },
     { id: "logo", label: "Change Logo", href: "/settings/logo" },
+    { id: "pdf", label: "ePaper", href: "/settings/pdfPaper" },
+    { id: "User ", label: "User Mangement", href: "/settings/users" },
+    { id: "password", label: "Change Password", href: "/settings/password" },
   ];
 
   const activeTab =
