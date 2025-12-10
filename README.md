@@ -2,8 +2,6 @@ TSB News24 — Next.js Fullstack News Portal
 
 A modern full-stack Bangla news portal built using Next.js 14, NextAuth, MongoDB, and a fully functional Admin Panel with image upload, category management, and role-based access control.
 
-admin@gmail.com
-password:12345678
 
 
 🔐 Admin Panel Features
