@@ -1,10 +1,13 @@
 "use client";
 import React, { useState } from "react";
+import { useUploadLogoMutation } from "@/app/redux/features/logo/logoApi";
+import Image from "next/image";
 
 export default function ChangeLogo() {
   const [preview, setPreview] = useState<string | null>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [loading, setLoading] = useState(false);
+
+  const [uploadLogo, { isLoading }] = useUploadLogoMutation();
 
   const handleFileChange = (file: File) => {
     setSelectedFile(file);
@@ -14,26 +17,12 @@ export default function ChangeLogo() {
   const handleUpload = async () => {
     if (!selectedFile) return;
 
-    setLoading(true);
-
     try {
-      // API UPLOAD HERE
-      const formData = new FormData();
-      formData.append("logo", selectedFile);
-
-      const res = await fetch("/api/settings/logo", {
-        method: "POST",
-        body: formData,
-      });
-      console.log(res)
-
-      if (!res.ok) throw new Error("Upload failed");
-
+      await uploadLogo(selectedFile).unwrap();
       alert("Logo updated successfully!");
     } catch (error) {
+      console.error(error);
       alert("Failed to upload logo");
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -54,7 +43,9 @@ export default function ChangeLogo() {
           type="file"
           accept="image/*"
           className="hidden"
-          onChange={(e) => e.target.files && handleFileChange(e.target.files[0])}
+          onChange={(e) =>
+            e.target.files && handleFileChange(e.target.files[0])
+          }
         />
 
         {!preview ? (
@@ -63,11 +54,14 @@ export default function ChangeLogo() {
             <p className="text-xs text-gray-400">PNG, JPG allowed</p>
           </div>
         ) : (
-          <img
-            src={preview}
-            alt="Preview"
-            className="h-32 object-contain"
-          />
+          <div className="relative h-32 w-full">
+            <Image
+              src={preview}
+              alt="Preview"
+              fill
+              className="object-contain"
+            />
+          </div>
         )}
       </label>
 
@@ -87,7 +81,7 @@ export default function ChangeLogo() {
       {/* Save Button */}
       <button
         onClick={handleUpload}
-        disabled={!selectedFile || loading}
+        disabled={!selectedFile || isLoading}
         className="
           w-full mt-5 py-3 rounded-xl 
           bg-gray-600 text-white font-semibold 
@@ -95,7 +89,7 @@ export default function ChangeLogo() {
           transition
         "
       >
-        {loading ? "Uploading..." : "Save Logo"}
+        {isLoading ? "Uploading..." : "Save Logo"}
       </button>
     </div>
   );

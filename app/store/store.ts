@@ -4,6 +4,7 @@ import { userApi } from "@/app/redux/features/user/userApi";
 import { newsApi } from "@/app/redux/features/news/newsApi";
 import { videoApi } from "@/app/redux/features/youtubeVideo/videoApi";
 import { adsApi } from "../redux/features/ads/adsApi";
+import { logoApi } from "../redux/features/logo/logoApi";
 
 export const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
     [newsApi.reducerPath]: newsApi.reducer,
     [videoApi.reducerPath]: videoApi.reducer,
     [adsApi.reducerPath]:adsApi.reducer,
+    [logoApi.reducerPath]: logoApi.reducer,
   },
 
   middleware: (getDefaultMiddleware) =>
@@ -18,7 +20,8 @@ export const store = configureStore({
       .concat(userApi.middleware)
       .concat(newsApi.middleware)
       .concat(videoApi.middleware)
-      .concat(adsApi.middleware),
+      .concat(adsApi.middleware)
+      .concat(logoApi.middleware),
 });
 
 setupListeners(store.dispatch);

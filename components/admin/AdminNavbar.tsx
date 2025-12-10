@@ -1,8 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { signOut } from "next-auth/react";
-import Image from "next/image";
-import Link from "next/link";
+
 
 import {
   MdDashboard,
@@ -16,6 +15,7 @@ import {
   MdKeyboardArrowDown,
   MdVideoLibrary,
 } from "react-icons/md";
+import Logo from "@/components/ui/Logo";
 
 interface NavLinkItem {
   id: number;
@@ -57,15 +57,8 @@ const AdminNavbar: React.FC = () => {
     <header className="w-full bg-white shadow-md fixed top-0 left-0 z-50">
       <div className="max-w-7xl mx-auto px-4 flex justify-between items-center h-16">
         <div className="flex items-center">
-          <Link href="/">
-            <Image
-              src="/logo/tsb.jpg"
-              alt="Logo"
-              width={100}
-              height={95}
-              className="object-contain "
-            />
-          </Link>
+          
+          <Logo width={100} height={95} />
         </div>
 
         {/* Center Menu Only for Desktop */}
